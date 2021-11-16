@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserComponent } from './user/user.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CreateUserComponent } from './user/create-user/create-user.component';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { UserComponent } from './user/users/user.component';
 
 const routes: Routes = [
-  { path: "users", component: UserComponent }
+  { path: "", pathMatch: "full", component: DashboardComponent },
+  { path: "users", component: UserComponent },
+  { path: "create-user", component: CreateUserComponent },
+  { path: "user/:id", component: UserDetailComponent }
 ];
 
 @NgModule({
