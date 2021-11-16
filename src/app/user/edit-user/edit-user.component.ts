@@ -1,17 +1,16 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
 @Component({
-  selector: 'app-user-detail',
-  templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.css']
+  selector: 'app-edit-user-detail',
+  templateUrl: './edit-user.component.html',
+  styleUrls: ['./edit-user.component.css']
 })
-export class UserDetailComponent implements OnInit {
+export class EditUserComponent implements OnInit {
 
   @Input() user?: User;
 
@@ -47,7 +46,7 @@ export class UserDetailComponent implements OnInit {
       progressBar: true
     });
 
-    this.router.navigate(["/"]);
+    this.location.back();
   }
 
 }

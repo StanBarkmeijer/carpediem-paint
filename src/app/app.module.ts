@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/users/user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatListModule } from '@angular/material/list';
 import { MatCommonModule } from '@angular/material/core';
@@ -25,6 +25,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { EditUserComponent } from './user/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -32,12 +33,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
     UserComponent,
     UserDetailComponent,
     DashboardComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,
     MatGridListModule,
     FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,

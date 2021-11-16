@@ -4,35 +4,39 @@
 </div>
 
 <div class="inner-wrapper">
-    <form>
+    <form [formGroup]="userForm" (ngSubmit)="sendForm()">
         <mat-card>
             <div class="controllers-wrapper">
                 <!-- Name -->
-                <mat-form-field [style.width.%]="100">
-                    <input matInput placeholder="Name">
+                <mat-form-field class="input">
+                    <input matInput placeholder="First name" formControlName="firstname" required>
                 </mat-form-field>
                 
-                <mat-form-field [style.width.%]="100">
-                    <input matInput placeholder="E-Mail">
+                <mat-form-field class="input">
+                    <input matInput placeholder="Last name" formControlName="lastname" required>
+                </mat-form-field>
+                
+                <mat-form-field class="input">
+                    <input matInput placeholder="E-Mail" formControlName="email" required>
                 </mat-form-field>
 
-                <mat-form-field [style.width.%]="100">
-                    <input type="password" matInput placeholder="Password">
+                <mat-form-field class="input">
+                    <input type="password" matInput placeholder="Password" formControlName="password" required>
                 </mat-form-field>
 
-                <mat-form-field [style.width.%]="100">
+                <mat-form-field class="input">
                     <input matInput readonly [matDatepicker]="picker" placeholder="Birthday">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
-                <div>
+                <!-- <div>
                     <mat-label>Gender: </mat-label>
                     <mat-radio-group aria-label="Select an option">
                         <mat-radio-button value="Male">Male</mat-radio-button>
                         <mat-radio-button value="Female">Female</mat-radio-button>
                     </mat-radio-group>
-                </div>
+                </div> -->
             </div>
         </mat-card>
 

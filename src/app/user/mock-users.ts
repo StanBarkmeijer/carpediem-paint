@@ -4,30 +4,34 @@ import {
 
 export const USERS: User[] = [{
     id: 0,
-    name: "Stan",
+    firstname: "Stan",
+    lastname: "Barkmeijer",
     email: "stanbarkmeijer@hotmail.com",
     password: "Test123",
-    birthday: "16-07-2001"
+    birthday: new Date(2001, 6, 17)
   },
   {
     id: 1,
-    name: "Wasd",
+    firstname: "Wasd",
+    lastname: "Barkmeijer",
     email: "stanbarkmeijer@hotmail.com",
     password: "Test123",
-    birthday: "16-07-2001"
+    birthday: new Date(2001, 6, 17)
   },
   {
     id: 2,
-    name: "ASDd",
+    firstname: "ASDd",
+    lastname: "Barkmeijer",
     email: "stanbarkmeijer@hotmail.com",
     password: "Test123",
-    birthday: "16-07-2001"
+    birthday: new Date(2001, 6, 17)
   },
   {
     id: 3,
-    name: "asdff",
+    firstname: "asdff",
+    lastname: "Barkmeijer",
     email: "stanbarkmeijer@hotmail.com",
     password: "Test123",
-    birthday: "16-07-2001"
+    birthday: new Date(2001, 6, 17)
   }
 ];

@@ -1,12 +1,14 @@
-<mat-card class="card">
-    <mat-card-content>
-        <mat-list>
-            <div mat-subheader>Users</div>
-            <mat-list-item *ngFor="let user of users">
-                <mat-icon mat-list-icon>person</mat-icon>
-                <div mat-line><a routerLink="/user/{{user.id}}">{{ user.name }}</a></div>
-                <div mat-line>{{ user.birthday }}</div>
-            </mat-list-item>
-        </mat-list>
-    </mat-card-content>
-</mat-card>
+<div>
+    <mat-card class="card">
+        <mat-card-content>
+            <mat-list>
+                <div mat-subheader>Users</div>
+                <mat-list-item *ngFor="let user of users">
+                    <mat-icon mat-list-icon>person</mat-icon>
+                    <div mat-line><a routerLink="/user/{{user.id}}">{{ user.firstname }}</a></div>
+                    <div mat-line>{{ user.email }}</div>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -32,4 +32,7 @@ export class UserService {
     this.users = users;
   };
 
+  createUser(user: User): void {
+    this.users.push(user);
+  }
 }
