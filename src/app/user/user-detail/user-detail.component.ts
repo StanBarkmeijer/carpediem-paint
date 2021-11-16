@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../user';
-import { UserService } from '../../user.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-user-detail',
