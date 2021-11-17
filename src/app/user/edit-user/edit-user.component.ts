@@ -46,7 +46,7 @@ export class EditUserComponent implements OnInit {
       progressBar: true
     });
 
-    this.location.back();
+    this.router.navigate(["/users"]);
   }
 
 }
