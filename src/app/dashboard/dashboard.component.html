@@ -1,17 +1,17 @@
-<div class="content">
-    <h1>Welkom op deze applicatie</h1>
-    
-    <mat-grid-list style="margin-top: 20px;" cols="2">
-        <mat-grid-tile>
-            <mat-card class="description">
-                <mat-card-title>Carpediemshipping Paint Program</mat-card-title>
-                <mat-card-subtitle>Uitleg over deze casus</mat-card-subtitle>
-                <mat-card-content>
-                    <p>Description here</p>
-                </mat-card-content>
-            </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>2</mat-grid-tile>
-    </mat-grid-list>
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="2" rowHeight="450px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div [innerHTML]="card.content" style="text-align: left;"><p [innerHTML]="card.content" style="text-align: left;"></p></div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
-

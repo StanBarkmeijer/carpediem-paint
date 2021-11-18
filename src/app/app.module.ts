@@ -26,6 +26,7 @@ import { CreateUserComponent } from './user/create-user/create-user.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { EditUserComponent } from './user/edit-user/edit-user.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    LayoutModule
   ],
   providers: [
     MatDatepickerModule,
