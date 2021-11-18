@@ -4,5 +4,6 @@ export interface User {
     lastname: string,
     email: string,
     password: string,
-    birthday: Date
+    birthday: Date,
+    admin: boolean
 }

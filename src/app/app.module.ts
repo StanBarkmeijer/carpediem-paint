@@ -27,6 +27,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { NavComponent } from './nav/nav.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -35,9 +40,11 @@ import { LayoutModule } from '@angular/cdk/layout';
     UserDetailComponent,
     DashboardComponent,
     CreateUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    NavComponent
   ],
   imports: [
+    MatSidenavModule,
     CommonModule,
     MatGridListModule,
     FormsModule,
@@ -58,7 +65,10 @@ import { LayoutModule } from '@angular/cdk/layout';
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    LayoutModule
+    LayoutModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     MatDatepickerModule,
