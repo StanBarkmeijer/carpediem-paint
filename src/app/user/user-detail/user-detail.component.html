@@ -1,7 +1,7 @@
 <div>
     <mat-card *ngIf="user" class="card">
         <mat-card-header>
-            <mat-card-title>User information: {{ user.firstname | uppercase }}</mat-card-title>
+            <mat-card-title>User information: {{ user.firstname | uppercase }} {{ user.admin ? "(Admin)" : "" }}</mat-card-title>
             <mat-card-subtitle>{{ user.birthday | date }}</mat-card-subtitle>
         </mat-card-header>
     
