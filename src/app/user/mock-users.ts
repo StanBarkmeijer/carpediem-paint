@@ -9,7 +9,7 @@ export const USERS: User[] = [{
     email: "stanbarkmeijer@hotmail.com",
     password: "Test123",
     birthday: new Date(2001, 6, 16),
-    admin: true
+    admin: false
   },
   {
     id: 1,
@@ -37,5 +37,14 @@ export const USERS: User[] = [{
     password: "Test123",
     birthday: new Date(1978, 5, 14),
     admin: false
+  },
+  {
+    id: 4,
+    firstname: "Tester",
+    lastname: "Nadmin",
+    email: "test@carpediem-paint.herokuapp.com",
+    password: "Testaccount",
+    birthday: new Date(),
+    admin: true
   }
 ];
