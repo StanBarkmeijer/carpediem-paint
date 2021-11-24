@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
 
 import { EditUserComponent } from './edit-user.component';
 
@@ -8,7 +11,8 @@ describe('EditUserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditUserComponent ]
+      declarations: [ EditUserComponent ],
+      imports: [ RouterTestingModule, ToastrModule.forRoot() ]
     })
     .compileComponents();
   });
