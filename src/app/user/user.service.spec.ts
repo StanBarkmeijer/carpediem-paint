@@ -89,8 +89,6 @@ describe('UserService', () => {
     service
       .createUser(user);
 
-    console.log(service.users);
-
     expect(service.users.length).toBe(6);
     
     done();
