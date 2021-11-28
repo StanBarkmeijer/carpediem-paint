@@ -1,11 +1,9 @@
-<div class="title-group">
-    <h1 class="mat-h1">Add User</h1>
-    <mat-divider fxFlex="1 0"></mat-divider>
-</div>
-
-<div class="inner-wrapper">
+<div class="inner-wrapper card">
     <form [formGroup]="userForm" (ngSubmit)="sendForm()">
         <mat-card>
+
+            <mat-card-title>Add user</mat-card-title>
+
             <div class="controllers-wrapper">
                 <!-- Name -->
                 <mat-form-field class="input">
@@ -37,13 +35,11 @@
                         <mat-radio-button value="Female">Female</mat-radio-button>
                     </mat-radio-group>
                 </div> -->
-            </div>
-        </mat-card>
-
-        <mat-card>
-            <div class="full-wrapper button-wrapper">
-                <div class="button-wrapper">
-                    <button mat-flat-button color="primary">Submit</button>
+                
+                <div class="full-wrapper button-wrapper">
+                    <div class="button-wrapper">
+                        <button mat-flat-button color="primary">Submit</button>
+                    </div>
                 </div>
             </div>
         </mat-card>

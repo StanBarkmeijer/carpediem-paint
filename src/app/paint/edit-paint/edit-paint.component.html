@@ -1,0 +1,33 @@
+<mat-card *ngIf="paint" class="card">
+    <mat-card-header>
+        <mat-card-title>{{ paint.name }}</mat-card-title>
+        <mat-card-subtitle>{{ paint.price | currency: "EUR" }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p>
+            Edit information from {{ paint.name | uppercase }} below
+        </p>    
+        <mat-form-field class="input">
+            <mat-label>Paint name</mat-label>
+            <input matInput [(ngModel)]="paint.name" placeholder="name">
+        </mat-form-field>
+        <mat-form-field class="input">
+            <mat-label>Paint price</mat-label>
+            <input type="number" matInput [(ngModel)]="paint.price" placeholder="price">
+        </mat-form-field>
+        <mat-form-field class="input">
+            <mat-label>Paint URL</mat-label>
+            <input matInput [(ngModel)]="paint.url" placeholder="url">
+        </mat-form-field>
+        <mat-form-field class="input">
+            <mat-label>Color</mat-label>
+            <input type="color" matInput [(ngModel)]="paint.color" placeholder="color">
+        </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions>
+        <button (click)="goBack()" mat-button>BACK</button>
+        <button (click)="deletePaint(paint.id)" mat-button>DELETE PAINT</button>
+    </mat-card-actions>
+</mat-card>

@@ -1,0 +1,14 @@
+<div>
+    <mat-card class="card">
+        <mat-card-content>
+            <mat-list>
+                <div mat-subheader>Paints</div>
+                <mat-list-item *ngFor="let paint of paints">
+                    <mat-icon mat-list-icon [ngStyle]="{ color: paint.color }">format_paint</mat-icon>
+                    <div mat-line><a routerLink="/paint/{{paint.id}}">{{ paint.name }}</a></div>
+                    <div mat-line>{{ paint.price | currency: 'EUR' }}</div>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>

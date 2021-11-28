@@ -1,0 +1,19 @@
+<div class="card">
+    <mat-card *ngIf="paint" class="card">
+        <mat-card-header>
+            <mat-card-title>Paint information: {{ paint.name | uppercase }}</mat-card-title>
+            <mat-card-subtitle>{{ paint.price | currency: "EUR" }}</mat-card-subtitle>
+        </mat-card-header>
+    
+        <mat-card-content> 
+            <mat-label><p><b>URL: </b><a href="{{ paint.url }}" target="blank">click me</a></p></mat-label>
+            <img mat-card-md-image class="img" src="https://singlecolorimage.com/get/{{paint.color.substring(1, paint.color.length)}}/400x400" >
+        </mat-card-content>
+    
+        <mat-card-actions>
+            <button (click)="goBack()" mat-button>BACK</button>
+            <button routerLink="/edit-paint/{{paint.id}}" mat-button>EDIT PAINT</button>
+            <button (click)="deletePaint(paint.id)" mat-button>DELETE PAINT</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -1,0 +1,41 @@
+<div class="inner-wrapper card">
+    <form [formGroup]="paintForm" (ngSubmit)="sendForm()">
+        <mat-card>
+
+            <mat-card-title>Create paint</mat-card-title>
+
+            <div class="controllers-wrapper">
+                <!-- Name -->
+                <mat-form-field class="input">
+                    <input matInput placeholder="Name" formControlName="name" required>
+                </mat-form-field>
+                
+                <mat-form-field class="input">
+                    <input  type="number" step="any" matInput placeholder="Price" formControlName="price" required>
+                </mat-form-field>
+                
+                <mat-form-field class="input">
+                    <input matInput placeholder="URL" formControlName="url" required>
+                </mat-form-field>
+
+                <mat-form-field class="input">
+                    <input type="color" matInput placeholder="Color" formControlName="color" required>
+                </mat-form-field>
+
+                <!-- <div>
+                    <mat-label>Gender: </mat-label>
+                    <mat-radio-group aria-label="Select an option">
+                        <mat-radio-button value="Male">Male</mat-radio-button>
+                        <mat-radio-button value="Female">Female</mat-radio-button>
+                    </mat-radio-group>
+                </div> -->
+            </div>
+
+            <div class="full-wrapper button-wrapper">
+                <div class="button-wrapper">
+                    <button mat-flat-button color="primary">Submit</button>
+                </div>
+            </div>
+        </mat-card>
+    </form>
+</div>

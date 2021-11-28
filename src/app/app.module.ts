@@ -32,6 +32,10 @@ import { NavComponent } from './nav/nav.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { CreatePaintComponent } from './paint/create-paint/create-paint.component';
+import { PaintsComponent } from './paint/paints/paints.component';
+import { PaintDetailComponent } from './paint/paint-detail/paint-detail.component';
+import { EditPaintComponent } from './paint/edit-paint/edit-paint.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { MatSortModule } from '@angular/material/sort';
     DashboardComponent,
     CreateUserComponent,
     EditUserComponent,
-    NavComponent
+    NavComponent,
+    CreatePaintComponent,
+    PaintsComponent,
+    PaintDetailComponent,
+    EditPaintComponent
   ],
   imports: [
     MatSidenavModule,

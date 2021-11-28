@@ -1,6 +1,5 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../user';
@@ -47,7 +46,7 @@ export class UserDetailComponent implements OnInit {
       progressBar: true
     });
 
-    this.router.navigate(["/"]);
+    this.router.navigate(["/users"]);
   }
 
 }

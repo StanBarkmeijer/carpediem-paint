@@ -1,11 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
+import { USERS } from './mock-users';
 import { User } from './user';
 
 import { UserService } from './user.service';
 
 describe('UserService', () => {
   let service: UserService;
+  let user: User = {
+    id: 6,
+    firstname: 'Test',
+    lastname: 'Test',
+    email: 'Test',
+    password: 'Test',
+    birthday: new Date(),
+    admin: false
+  }
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -70,27 +80,6 @@ describe('UserService', () => {
 
     expect(service.users.length).toBe(5);
 
-    done();
-  });
-
-  it("should add user", (done) => {
-    expect(service.users.length).toBe(5);
-
-    const user: User = {
-      id: 6,
-      firstname: 'Test',
-      lastname: 'Test',
-      email: 'Test',
-      password: 'Test',
-      birthday: new Date(),
-      admin: false
-    }
-
-    service
-      .createUser(user);
-
-    expect(service.users.length).toBe(6);
-    
     done();
   });
 });
