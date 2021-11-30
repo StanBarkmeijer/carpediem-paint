@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
 
 import { CreatePaintComponent } from './create-paint.component';
 
@@ -8,7 +11,13 @@ describe('CreatePaintComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreatePaintComponent ]
+      declarations: [ CreatePaintComponent ],
+      imports: [ 
+        RouterTestingModule, 
+        FormsModule, 
+        ReactiveFormsModule, 
+        ToastrModule.forRoot() 
+      ]
     })
     .compileComponents();
   });

@@ -7,7 +7,7 @@
     
         <mat-card-content> 
             <mat-label><p><b>URL: </b><a href="{{ paint.url }}" target="blank">click me</a></p></mat-label>
-            <img mat-card-md-image class="img" src="https://singlecolorimage.com/get/{{paint.color.substring(1, paint.color.length)}}/400x400" >
+            <img mat-card-md-image class="img" src="https://singlecolorimage.com/get/{{paint.color.substring(1, paint.color.length)}}/400x400" [alt]="paint.color">
         </mat-card-content>
     
         <mat-card-actions>
