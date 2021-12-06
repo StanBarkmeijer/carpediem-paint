@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { schema } = require("./order.model"); 
 
 const UserSchema = new mongoose.Schema({
     firstName: { 
@@ -30,7 +31,8 @@ const UserSchema = new mongoose.Schema({
         {
             type: String
         }
-    ]
+    ],
+    orders: [ schema ]
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Users", UserSchema);
