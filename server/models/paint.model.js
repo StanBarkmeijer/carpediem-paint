@@ -10,7 +10,7 @@ const PaintSchema = new mongoose.Schema({
         required: true
     },
     url: {
-        type: Number
+        type: String
     }
 });
 

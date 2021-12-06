@@ -11,10 +11,10 @@ const userSchema = Joi.object({
 });
 
 module.exports = {
-  insert,
+  create,
 };
 
-async function insert(user) {
+async function create(user) {
   user = await userSchema.validateAsync(user, { abortEarly: false });
   user.hashedPassword = bcrypt.hashSync(user.password, 10);
   delete user.password;
