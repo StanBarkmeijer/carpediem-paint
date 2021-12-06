@@ -1,15 +1,12 @@
-//Install express server
-const express = require('express');
-const path = require('path');
+const config = require("./config/config");
+const app = require("./config/express");
 
-const app = express();
+require("./config/mongoose");
 
-// Serve only the static files form the dist directory
-app.use(express.static('./dist/carpediemshipping-paint'));
+if (!module.parent) {
+  app.listen(config.port, () => {
+    console.info(`Server started on port ${config.port} (${config.env})`)
+  });
+}
 
-app.get('/*', function (req, res) {
-  res.sendFile(path.join('/dist/carpediemshipping-paint/index.html'), { root: "./" });
-});
-
-// Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8081);
+module.exports = app;
