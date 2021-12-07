@@ -20,14 +20,14 @@ export class PaintService {
     return paints;
   }
 
-  getPaint(id: number): Observable<Paint> {
-    const paint = this.paints.find((p: Paint) => p.id === id)!;
+  getPaint(id: string): Observable<Paint> {
+    const paint = this.paints.find((p: Paint) => p._id === id)!;
 
     return of(paint);
   }
 
-  deletePaint(id: number):void {
-    const paints = this.paints.filter((p: Paint) => p.id !== id)!;
+  deletePaint(id: string):void {
+    const paints = this.paints.filter((p: Paint) => p._id !== id)!;
 
     this.paints = paints;
   }

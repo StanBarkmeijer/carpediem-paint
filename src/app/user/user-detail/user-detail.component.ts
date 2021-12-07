@@ -27,11 +27,11 @@ export class UserDetailComponent implements OnInit {
   }
 
   getUser(): void {
-    this.route.params.subscribe((param) => {
-      const id = Number(param["id"]);
+    this.route.params.subscribe((param: any) => {
+      const id = param["id"];
 
       this.userService.getUser(id)
-        .subscribe((user) => this.user = user);
+        .subscribe((user: User | undefined) => this.user = user);
     }) 
   }
 
@@ -39,7 +39,7 @@ export class UserDetailComponent implements OnInit {
     this.location.back();
   }
 
-  deleteUser(id: number): void {
+  deleteUser(id: string): void {
     this.userService.deleteUser(id);
 
     this.toastr.success(`User with id: ${id} deleted`, "User deleted",  {

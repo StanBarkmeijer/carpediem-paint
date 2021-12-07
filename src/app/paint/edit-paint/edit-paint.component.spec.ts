@@ -28,7 +28,7 @@ describe('EditPaintComponent', () => {
 
   it('should correctly render the passed @Input value', () => {  
     component.paint = { 
-      id: 0,
+      _id: "0",
       name: "Nelfamar Supertop Gloss Sneeuwwit 1 comp",
       price: 15,
       url: "https://www.verfgroothandel.nl/nelfamar-supertop-1.html",

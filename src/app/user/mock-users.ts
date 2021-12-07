@@ -3,48 +3,58 @@ import {
 } from "./user";
 
 export const USERS: User[] = [{
-    id: 0,
-    firstname: "Stan",
-    lastname: "Barkmeijer",
+    _id: "0",
+    firstName: "Stan",
+    lastName: "Barkmeijer",
     email: "stanbarkmeijer@hotmail.com",
     password: "Test123",
+    hashedPassword: "",
     birthday: new Date(2001, 6, 16),
-    admin: false
+    roles: [],
+    orders: []
   },
   {
-    id: 1,
-    firstname: "Kyra",
-    lastname: "Ooms",
+    _id: "1",
+    firstName: "Kyra",
+    lastName: "Ooms",
     email: "kyra@carpediemshipping.com",
     password: "Test123",
+    hashedPassword: "",
     birthday: new Date(2002, 4, 21),
-    admin: false
+    roles: [],
+    orders: []
   },
   {
-    id: 2,
-    firstname: "Alice",
-    lastname: "Ooms",
+    _id: "2",
+    firstName: "Alice",
+    lastName: "Ooms",
     email: "alice@carpediemshipping.com",
     password: "Test123",
+    hashedPassword: "",
     birthday: new Date(1981, 7, 5),
-    admin: true
+    roles: [],
+    orders: []
   },
   {
-    id: 3,
-    firstname: "Wilco",
-    lastname: "Ooms",
+    _id: "3",
+    firstName: "Wilco",
+    lastName: "Ooms",
     email: "wilco@carpediemshipping.com",
     password: "Test123",
+    hashedPassword: "",
     birthday: new Date(1978, 5, 14),
-    admin: false
+    roles: [],
+    orders: []
   },
   {
-    id: 4,
-    firstname: "Tester",
-    lastname: "Nadmin",
+    _id: "4",
+    firstName: "Tester",
+    lastName: "Nadmin",
     email: "test@carpediem-paint.herokuapp.com",
     password: "Testaccount",
+    hashedPassword: "",
     birthday: new Date(),
-    admin: true
+    roles: [],
+    orders: []
   }
 ];

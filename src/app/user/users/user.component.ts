@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
 
   getUsers(): void {
     this.userService.getUsers()
-      .subscribe((users) => this.users = users);
+      .subscribe((users: User[]) => this.users = users);
   }
 
 }

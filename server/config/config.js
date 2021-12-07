@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config({ path: ".env" });
 
 const envVarsSchema = Joi.object({
     NODE_ENV: Joi.string()
