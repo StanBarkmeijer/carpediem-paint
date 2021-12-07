@@ -1,21 +1,21 @@
 <div>
     <mat-card *ngIf="user" class="card">
         <mat-card-header>
-            <mat-card-title>User information: {{ user.firstname | uppercase }} {{ user.admin ? "(Admin)" : "" }}</mat-card-title>
+            <mat-card-title>User information: {{ user.firstName | uppercase }} {{ user.roles.includes("admin") ? "(Admin)" : "" }}</mat-card-title>
             <mat-card-subtitle>{{ user.birthday | date }}</mat-card-subtitle>
         </mat-card-header>
     
         <mat-card-content> 
-            <mat-label><p><b>First name:</b> {{ user.firstname }}</p></mat-label>
-            <mat-label><p><b>Last name: </b>{{ user.lastname }}</p></mat-label>
+            <mat-label><p><b>First name:</b> {{ user.firstName }}</p></mat-label>
+            <mat-label><p><b>Last name: </b>{{ user.lastName }}</p></mat-label>
             <mat-label><p><b>E-Mail: </b>{{ user.email }}</p></mat-label>
             <mat-label><p><b>Birthday:  </b>{{ user.birthday | date }}</p></mat-label>
         </mat-card-content>
     
         <mat-card-actions>
             <button (click)="goBack()" mat-button>BACK</button>
-            <button routerLink="/edit-user/{{user.id}}" mat-button>EDIT USER</button>
-            <button (click)="deleteUser(user.id)" mat-button>DELETE USER</button>
+            <button routerLink="/edit-user/{{user._id}}" mat-button>EDIT USER</button>
+            <button (click)="deleteUser(user._id)" mat-button>DELETE USER</button>
         </mat-card-actions>
     </mat-card>
 </div>

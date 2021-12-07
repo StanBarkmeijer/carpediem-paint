@@ -20,14 +20,14 @@ export class UserService {
     return users;
   }
 
-  getUser(id: number): Observable<User> {
-    const user = this.users.find((u: User) => u.id === id)!;
+  getUser(id: string): Observable<User> {
+    const user = this.users.find((u: User) => u._id === id)!;
 
     return of(user);
   }
 
-  deleteUser(id: number): void {
-    const users = this.users.filter((u: User) => u.id !== id)!;
+  deleteUser(id: string): void {
+    const users = this.users.filter((u: User) => u._id !== id)!;
 
     this.users = users;
   };

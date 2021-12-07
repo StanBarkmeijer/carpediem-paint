@@ -27,11 +27,11 @@ export class EditPaintComponent implements OnInit {
   }
 
   getPaint(): void {
-    this.route.params.subscribe((param) => {
-      const id = Number(param["id"]);
+    this.route.params.subscribe((param: any) => {
+      const id = param["id"];
 
       this.paintService.getPaint(id)
-        .subscribe((paint) => this.paint = paint);
+        .subscribe((paint: Paint) => this.paint = paint);
     }) 
   }
 
@@ -39,7 +39,7 @@ export class EditPaintComponent implements OnInit {
     this.location.back();
   }
 
-  deletePaint(id: number): void {
+  deletePaint(id: string): void {
     this.paintService.deletePaint(id);
 
     this.toastr.success(`Paint with id: ${id} deleted`, "Paint deleted",  {

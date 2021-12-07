@@ -5,7 +5,9 @@ export interface User {
     firstName: string,
     lastName: string,
     email: string,
+    password: string,
     hashedPassword: string,
     birthday: Date,
+    roles: Array<string>
     orders: Array<Order>
 }

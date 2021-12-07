@@ -8,13 +8,15 @@ import { UserService } from './user.service';
 describe('UserService', () => {
   let service: UserService;
   let user: User = {
-    id: 6,
-    firstname: 'Test',
-    lastname: 'Test',
+    _id: "6",
+    firstName: 'Test',
+    lastName: 'Test',
     email: 'Test',
     password: 'Test',
+    hashedPassword: "",
     birthday: new Date(),
-    admin: false
+    roles: [],
+    orders: []
   }
 
   beforeEach(() => {
@@ -36,14 +38,14 @@ describe('UserService', () => {
   });
 
   it("should retrieve 1 user", (done) => {
-    let user: Observable<User> = service.getUser(0);
+    let user: Observable<User> = service.getUser("0");
 
     user
       .subscribe((u) => {
         expect(typeof u).toBe("object");
 
-        expect(u.firstname).toBe("Stan");
-        expect(u.lastname).toBe("Barkmeijer");
+        expect(u.firstName).toBe("Stan");
+        expect(u.lastName).toBe("Barkmeijer");
         expect(u.email).toBe("stanbarkmeijer@hotmail.com");
       });
 
@@ -51,7 +53,7 @@ describe('UserService', () => {
   });
 
   it("should not retrieve a user with non existant ID", (done) => {
-    let user: Observable<User> = service.getUser(999999);
+    let user: Observable<User> = service.getUser("999999");
 
     user
       .subscribe((u) => {
@@ -65,7 +67,7 @@ describe('UserService', () => {
     expect(service.users.length).toBe(5);
 
     service
-      .deleteUser(1);
+      .deleteUser("1");
 
     expect(service.users.length).toBe(4);
 
@@ -76,7 +78,7 @@ describe('UserService', () => {
     expect(service.users.length).toBe(5);
 
     service
-      .deleteUser(999999);
+      .deleteUser("999999");
 
     expect(service.users.length).toBe(5);
 
