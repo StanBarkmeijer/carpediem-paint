@@ -1,5 +1,5 @@
 export interface Paint {
-    id: number,
+    _id: string,
     name: string,
     price: number,
     url: string,

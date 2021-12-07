@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Paint = require("./paint.model");
 
 const OrderSchema = new mongoose.Schema({
     user: {
@@ -9,12 +10,7 @@ const OrderSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    paints: [
-        { 
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Paints"
-        }
-    ]
+    paints: [ Paint.schema ]
 });
 
 module.exports.schema = OrderSchema;

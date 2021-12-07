@@ -11,6 +11,9 @@ const PaintSchema = new mongoose.Schema({
     },
     url: {
         type: String
+    },
+    color: {
+        type: String
     }
 });
 

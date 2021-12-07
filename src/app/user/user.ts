@@ -1,9 +1,11 @@
+import { Order } from "../order/order";
+
 export interface User {
-    id: number,
-    firstname: string,
-    lastname: string,
+    _id: string,
+    firstName: string,
+    lastName: string,
     email: string,
-    password: string,
+    hashedPassword: string,
     birthday: Date,
-    admin: boolean
+    orders: Array<Order>
 }

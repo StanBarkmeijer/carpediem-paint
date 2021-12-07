@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const Joi = require('joi');
 const User = require('../models/user.model');
+const Order = require("../models/order.model");
 
 const userSchema = Joi.object({
   firstName: Joi.string().required(),
@@ -13,13 +14,14 @@ const userSchema = Joi.object({
 module.exports = {
   create,
   read,
+  getOrders,
   update,
   remove,
   removeAll
 };
 
-async function create(user) {
-  user = await userSchema.validateAsync(user, { abortEarly: false });
+async function create(req, res) {
+  user = await userSchema.validateAsync(req.body, { abortEarly: false });
   user.hashedPassword = bcrypt.hashSync(user.password, 10);
   delete user.password;
 
@@ -53,6 +55,21 @@ async function read(req, res) {
                     message: err.message || "Some error occurred while retrieving users"
                 });
         });
+}
+
+async function getOrders(req, res) {    
+    User.model
+        .find({ _id: req.params.id })
+        .then((data) => {
+            res.json(data[0].orders)
+        })
+        .catch((err) => {
+            res
+                .status(500)
+                .send({
+                    message: err.message || "Some error occurred while retrieving user's orders"
+                });
+        })
 }
 
 async function update(req, res) {
@@ -100,8 +117,13 @@ async function remove(req, res) {
                         message: `Can't delete User with ID=${id}.`
                     });
             } else {
-                res
-                    .send({ message: `User with ID=${id} was deleted succesfully`});
+                Order
+                    .schema
+                    .deleteMany({ user: id })
+                    .then((data2) => {
+                        res
+                            .send({ message: `User with ID=${id} and ${data2.deletedCount} orders were deleted succesfully`});
+                    });
             }
         })
         .catch((err) => {

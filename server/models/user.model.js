@@ -35,4 +35,5 @@ const UserSchema = new mongoose.Schema({
     orders: [ schema ]
 });
 
-module.exports = mongoose.model("Users", UserSchema);
+module.exports.schema = UserSchema;
+module.exports.model = mongoose.model("Users", UserSchema);
