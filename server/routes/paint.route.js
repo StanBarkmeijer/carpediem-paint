@@ -12,7 +12,7 @@ router.post("/", asyncHandler(paintCtrl.create));
 router.get("/", asyncHandler(paintCtrl.read));
 router.delete("/", asyncHandler(paintCtrl.removeAll));
 
-// /api/paint/id
+// /api/paint/:id
 router.get("/:id", asyncHandler(paintCtrl.read));
 router.put("/:id", asyncHandler(paintCtrl.update))
 router.delete("/:id", asyncHandler(paintCtrl.remove));

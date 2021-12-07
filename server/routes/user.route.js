@@ -4,13 +4,17 @@ const asyncHandler = require('express-async-handler');
 const userCtrl = require('../controllers/user.controller');
 
 const router = express.Router();
+
 module.exports = router;
 
 router.use(passport.authenticate('jwt', { session: false }));
 
-router.route('/').post(asyncHandler(insert));
+// /api/user
+router.post("/", asyncHandler(userCtrl.create));
+router.get("/", asyncHandler(userCtrl.read));
+router.delete("/", asyncHandler(userCtrl.removeAll));
 
-async function insert(req, res) {
-  let user = await userCtrl.create(req.body);
-  res.json(user);
-}
+// /api/user/:id
+router.get("/:id", asyncHandler(userCtrl.read));
+router.put("/:id", asyncHandler(userCtrl.update))
+router.delete("/:id", asyncHandler(userCtrl.remove));
