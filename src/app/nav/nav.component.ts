@@ -22,7 +22,6 @@ export class NavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver, 
-    private router: Router, 
     private authService: AuthService
   ) {}
 
@@ -32,7 +31,6 @@ export class NavComponent {
 
   signOut(): void {
     this.authService.signOut();
-    this.router.navigateByUrl("/");
   }
 
 }

@@ -41,6 +41,9 @@ import { UserService } from './user/user.service';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { OnlyAdminUsersGuard } from './auth/admin-user-guard';
+import { AuthGuard } from './auth/auth.guard';
+import { TokenStorage } from './auth/token.storage';
+import { Router, RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -84,13 +87,16 @@ import { OnlyAdminUsersGuard } from './auth/admin-user-guard';
     LayoutModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    RouterModule.forRoot([])
   ],
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,
     UserService,
-    OnlyAdminUsersGuard
+    OnlyAdminUsersGuard,
+    AuthGuard,
+    TokenStorage,
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
