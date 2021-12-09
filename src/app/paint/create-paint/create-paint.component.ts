@@ -12,7 +12,6 @@ import { PaintService } from '../paint.service';
 export class CreatePaintComponent implements OnInit {
 
   paintForm = this.fb.group({
-    id: ((Math.random() * 100) + 1)|0,
     name: ["", Validators.required],
     price: ["", Validators.required],
     url: ["", Validators.required],
@@ -30,6 +29,8 @@ export class CreatePaintComponent implements OnInit {
   }
 
   sendForm(): void {
+    console.log(this.paintForm.value);
+    
     this.paintService.createPaint(this.paintForm.value);
 
     this.toastr.success(`Created paint with ID: ${this.paintForm.value.id}`, "Added user", {

@@ -5,7 +5,8 @@ const Paint = require("../models/paint.model");
 const paintSchema = Joi.object({
     name: Joi.string().required(),
     price: Joi.number().required(),
-    url: Joi.string()
+    url: Joi.string(),
+    color: Joi.string()
 });
 
 module.exports = {

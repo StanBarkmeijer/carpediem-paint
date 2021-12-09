@@ -36,6 +36,8 @@ import { CreatePaintComponent } from './paint/create-paint/create-paint.componen
 import { PaintsComponent } from './paint/paints/paints.component';
 import { PaintDetailComponent } from './paint/paint-detail/paint-detail.component';
 import { EditPaintComponent } from './paint/edit-paint/edit-paint.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { EditPaintComponent } from './paint/edit-paint/edit-paint.component';
     EditPaintComponent
   ],
   imports: [
+    HttpClientModule,
     MatSidenavModule,
     CommonModule,
     MatGridListModule,
@@ -80,7 +83,8 @@ import { EditPaintComponent } from './paint/edit-paint/edit-paint.component';
   ],
   providers: [
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    UserService
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

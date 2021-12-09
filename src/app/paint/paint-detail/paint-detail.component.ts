@@ -34,7 +34,7 @@ export class PaintDetailComponent implements OnInit {
       console.log(id);
 
       this.paintService.getPaint(id)
-        .subscribe((paint: Paint) => this.paint = paint);
+        .subscribe((paint: Paint[]) => this.paint = paint[0]);
     });
   }
 

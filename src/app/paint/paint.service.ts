@@ -1,38 +1,61 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { PAINTS } from './mock-paints';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { Paint } from './paint';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaintService {
 
-  paints: Paint[];
+  endpoint: string = "https://carpediem-paint.herokuapp.com/api/paint";
+  headers = new HttpHeaders().set("Content-Type", "application/json");
 
-  constructor() {
-    this.paints = PAINTS;  
+  constructor(private http: HttpClient) { }
+
+  createPaint(data: Paint): Observable<any> {
+    const API_URL = `${this.endpoint}`;
+
+    return this.http.post(API_URL, data)
+      .pipe(catchError(this.errorMngmt));
   }
 
-  getPaints(): Observable<Paint[]> {
-    const paints = of(this.paints);
-
-    return paints;
+  getPaints(): Observable<any> {
+    return this.http.get(this.endpoint);
   }
 
-  getPaint(id: string): Observable<Paint> {
-    const paint = this.paints.find((p: Paint) => p._id === id)!;
+  getPaint(id: string): Observable<any> {
+    const API_URL = `${this.endpoint}/${id}`;
 
-    return of(paint);
+    return this.http.get(API_URL, { headers: this.headers })
+      .pipe(
+        map((res: Object) => {
+          return res
+        }),
+        catchError(this.errorMngmt)
+      )
   }
 
-  deletePaint(id: string):void {
-    const paints = this.paints.filter((p: Paint) => p._id !== id)!;
+  deletePaint(id: string) {
+    const API_URL = `${this.endpoint}/${id}`
 
-    this.paints = paints;
-  }
+    return this.http.delete(API_URL)
+      .pipe(
+        catchError(this.errorMngmt)
+      )
+  } 
 
-  createPaint(paint: Paint): void {
-    this.paints.push(paint);
+  errorMngmt(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    
+    return throwError(errorMessage);
   }
+  
 }
