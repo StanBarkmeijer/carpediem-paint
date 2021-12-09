@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, of, pluck, tap } from 'rxjs';
 import { User } from '../user/user';
@@ -14,6 +14,9 @@ interface AuthResponse {
 })
 export class AuthService {
   private user$ = new BehaviorSubject<User | null>(null);
+  
+  endpoint: string = "https://carpediem-paint.herokuapp.com/api/user";
+  headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(
     private http: HttpClient,
@@ -21,8 +24,10 @@ export class AuthService {
   ) { }
 
   login(email: string, password: string): Observable<User> {
+    const API_URL = `${this.endpoint}/auth/login`
+
     return this.http
-      .post<AuthResponse>("http://carpediem-paint.herokuapp.com/api/auth/login", { email, password })
+      .post<AuthResponse>(API_URL, { email, password })
       .pipe(
         tap(({ token, user }) => {
           this.setUser(user);
