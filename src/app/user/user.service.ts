@@ -13,24 +13,33 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  createUser(data: User): Observable<any> {
+  createUser(data: User): Observable<User> {
     const API_URL = `${this.endpoint}`;
 
     return this.http.post(API_URL, data)
-      .pipe(catchError(this.errorMngmt));
+      .pipe(
+        map((res: Object) => <User>res),
+        catchError(this.errorMngmt)
+      );
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(this.endpoint);
+  getUsers(): Observable<User[]> {
+    return this.http.get(this.endpoint)
+      .pipe(
+        map((res: Object) => {
+          return <User[]>res;
+        }),
+        catchError(this.errorMngmt)
+      );
   }
 
-  getUser(id: string): Observable<any> {
+  getUser(id: string): Observable<User> {
     const API_URL = `${this.endpoint}/${id}`;
 
     return this.http.get(API_URL, { headers: this.headers })
       .pipe(
-        map((res: Object) => {
-          return res
+        map((res: any) => {
+          return <User>res[0]
         }),
         catchError(this.errorMngmt)
       )

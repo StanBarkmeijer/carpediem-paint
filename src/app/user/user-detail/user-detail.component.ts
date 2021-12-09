@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit {
       const id = param["id"];
 
       this.userService.getUser(id)
-        .subscribe((user: User[]) => this.user = user[0]);
+        .subscribe((user: User) => this.user = user);
     }) 
   }
 
