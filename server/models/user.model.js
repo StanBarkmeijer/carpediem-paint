@@ -32,7 +32,13 @@ const UserSchema = new mongoose.Schema({
             type: String
         }
     ],
-    orders: [ schema ]
+    orders: [ schema ],
+    follows: [
+        { 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Users"
+        }
+    ]
 });
 
 module.exports.schema = UserSchema;

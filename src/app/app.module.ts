@@ -38,6 +38,9 @@ import { PaintDetailComponent } from './paint/paint-detail/paint-detail.componen
 import { EditPaintComponent } from './paint/edit-paint/edit-paint.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './user/user.service';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { OnlyAdminUsersGuard } from './auth/admin-user-guard';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { UserService } from './user/user.service';
     CreatePaintComponent,
     PaintsComponent,
     PaintDetailComponent,
-    EditPaintComponent
+    EditPaintComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     HttpClientModule,
@@ -84,7 +89,8 @@ import { UserService } from './user/user.service';
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,
-    UserService
+    UserService,
+    OnlyAdminUsersGuard
   ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

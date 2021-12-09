@@ -6,7 +6,7 @@
                 <mat-list-item *ngFor="let user of users">
                     <mat-icon mat-list-icon *ngIf="user.roles.includes('admin')">engineering</mat-icon>
                     <mat-icon mat-list-icon *ngIf="!user.roles.includes('admin')">person</mat-icon>
-                    <div mat-line><a routerLink="/user/{{user._id}}">{{ user.firstName }}</a></div>
+                    <div mat-line><a routerLink="{{user._id}}">{{ user.firstName }}</a></div>
                     <div mat-line>{{ user.email }}</div>
                 </mat-list-item>
             </mat-list>

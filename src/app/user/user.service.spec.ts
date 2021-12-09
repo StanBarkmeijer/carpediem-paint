@@ -1,7 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-import { USERS } from './mock-users';
 import { User } from './user';
 
 import { UserService } from './user.service';

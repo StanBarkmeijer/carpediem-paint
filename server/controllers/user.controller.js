@@ -4,17 +4,37 @@ const User = require('../models/user.model');
 const Order = require("../models/order.model");
 
 const userSchema = Joi.object({
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
-  email: Joi.string().email(),
-  password: Joi.string().required(),
-  repeatPassword: Joi.string().required().valid(Joi.ref('password')),
+  firstName: Joi
+    .string()
+    .regex(/[A-Za-z]/)
+    .required(),
+
+  lastName: Joi
+    .string()
+    .regex(/[A-Za-z]/)
+    .required(),
+
+  email: Joi
+    .string()
+    .email()
+    .required(),
+
+  password: Joi
+    .string()
+    .regex(/^[a-zA-Z0-9]{3,30}$/)
+    .required(),
+
+  repeatPassword: Joi.string()
+    .required()
+    .valid(Joi.ref('password')),
 });
 
 module.exports = {
   create,
   read,
   getOrders,
+  getFollowing,
+  getFollowingOrders,
   update,
   remove,
   removeAll
@@ -68,6 +88,53 @@ async function getOrders(req, res) {
                 .status(500)
                 .send({
                     message: err.message || "Some error occurred while retrieving user's orders"
+                });
+        })
+}
+
+async function getFollowing(req, res) {
+    User.model
+        .find({ _id: req.params.id })
+        .then(({ following }) => {
+            res.json(following);
+        })
+        .catch((err) => {
+            res
+                .status(500)
+                .send({
+                    message: err.message || "Some error occurred while retrieving following orders"
+                });
+        })
+}
+
+async function getFollowingOrders(req, res) {
+    User.model
+        .find({ _id: req.params.id })
+        .then(({ following }) => {
+            let orders = [];
+
+            if (following.length > 0) {
+                following.forEach((follow) => {
+                    User.model
+                        .find({ _id: follow._id })
+                        .then((data) => orders.push(data.orders))
+                        .catch((err) => {
+                            res
+                                .status(500)
+                                .send({
+                                    message: err.message || "Some error occurred while retrieving user's orders"
+                                });
+                        })
+                });
+            }
+
+            res.json(orders);
+        })
+        .catch((err) => {
+            res
+                .status(500)
+                .send({
+                    message: err.message || "Some error occurred while retrieving following orders"
                 });
         })
 }

@@ -19,3 +19,7 @@ router.get("/:id", asyncHandler(userCtrl.read));
 router.get("/:id/orders", asyncHandler(userCtrl.getOrders));
 router.put("/:id", asyncHandler(userCtrl.update))
 router.delete("/:id", asyncHandler(userCtrl.remove));
+
+// /api/user/:id following
+router.get("/:id/following", asyncHandler(userCtrl.getFollowing));
+router.get("/:id/following/orders", asyncHandler(userCtrl.getFollowingOrders));
