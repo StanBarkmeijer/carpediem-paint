@@ -24,6 +24,7 @@ async function register(req, res, next) {
 }
 
 function login(req, res) {
+  console.log(req.user);
   let user = req.user;
   let token = authCtrl.generateToken(user);
   res.json({ user, token });

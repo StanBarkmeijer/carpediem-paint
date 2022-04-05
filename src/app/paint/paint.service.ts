@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 export class PaintService {
 
-  endpoint: string = "https://carpediem-paint.herokuapp.com/api/paint";
+  endpoint: string = "http://localhost:8081/api/paint";
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(private http: HttpClient) { }

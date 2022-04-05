@@ -190,7 +190,8 @@ async function remove(req, res) {
                     .then((data2) => {
                         res
                             .send({ message: `User with ID=${id} and ${data2.deletedCount} orders were deleted succesfully`});
-                    });
+                    })
+                    .catch((_)=>{});
             }
         })
         .catch((err) => {

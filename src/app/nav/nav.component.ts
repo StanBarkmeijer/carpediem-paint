@@ -22,7 +22,8 @@ export class NavComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver, 
-    private authService: AuthService
+    public authService: AuthService,
+    private router: Router
   ) {}
 
   isAdmin(): void {

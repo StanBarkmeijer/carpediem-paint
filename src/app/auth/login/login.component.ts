@@ -19,10 +19,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(): void {
+  login(): void {    
     this.authService
       .login(this.email!, this.password!)
-      .subscribe(() => this.router.navigateByUrl("/"));  
+      .subscribe(() => this.router.navigateByUrl("/")); 
+    
   }
 
 }
