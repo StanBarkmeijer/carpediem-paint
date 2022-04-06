@@ -1,46 +1,22 @@
-<mat-card class="example-card card">
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form class="example-form">
-        <table cellspacing="0">
-          <tr>
-            <td>
-              <mat-form-field>
-                <input
-                  matInput
-                  placeholder="Email"
-                  [(ngModel)]="email"
-                  name="email"
-                  required
-                />
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <mat-form-field>
-                <input
-                  matInput
-                  placeholder="Password"
-                  [(ngModel)]="password"
-                  type="password"
-                  name="password"
-                  (keyup)="handleEnter($event)"
-                  required
-                />
-              </mat-form-field>
-            </td>
-          </tr>
-        </table>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button (click)="login()" color="primary">Login</button>
-      <span>
-        Don't have an account ?
-        <a [routerLink]="['/auth/register']">register</a> here</span
-      >
-    </mat-card-actions>
-  </mat-card>
+<mat-grid-list cols="1" rowHeight="500px">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-grid-tile>
+            <div class="controllers-wrapper">
+              <h1>Login</h1>
+                <!-- Name -->
+                <mat-form-field appearance="fill" class="width-100">
+                    <input matInput placeholder="Email" formControlName="email" required>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill" class="width-100">
+                    <input type="password" matInput placeholder="Password" formControlName="password" required>
+                </mat-form-field>
+
+                <button mat-raised-button (click)="login()" color="primary">Login</button>
+                <span>
+                  Don't have an account ? 
+                  <a [routerLink]="['/auth/register']">register</a> here</span>
+            </div>
+          </mat-grid-tile>
+    </form>
+</mat-grid-list>

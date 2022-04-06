@@ -13,6 +13,23 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  register(data: {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    retypePassword: string,
+    birthday: Date
+  }): Observable<User> {
+    const API_URL = `${this.endpoint}`;
+
+    return this.http.post(API_URL, data)
+      .pipe(
+        map((res: Object) => <User>res),
+        catchError(this.errorMngmt)
+      );
+  }
+
   createUser(data: User): Observable<User> {
     const API_URL = `${this.endpoint}`;
 

@@ -27,7 +27,7 @@ const routes: Routes = [
 
   { path: "paints", component: PaintsComponent, canActivate: [AuthGuard] },
   { path: "edit-paint/:id", component: EditPaintComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "create-paint", component: CreatePaintComponent, canActivate: [OnlyAdminUsersGuard] },
+  { path: "create-paint", component: CreatePaintComponent /*, canActivate: [OnlyAdminUsersGuard] */ },
   { path: "paint/:id", component: PaintDetailComponent, canActivate: [AuthGuard] }
 ];
 

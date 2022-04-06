@@ -1,1 +1,88 @@
-<p>register works!</p>
+<mat-grid-list cols="1" rowHeight="500px">
+    <form [formGroup]="registerForm" (ngSubmit)="register">
+    <mat-grid-tile>
+        <div class="example-container">
+            <h1>Register</h1>
+          <mat-form-field appearance="fill" class="width-50">
+            <mat-label>First Name</mat-label>
+            <input 
+                matInput
+                placeholder="First name"
+                required
+                formControlName="firstName"
+            >
+          </mat-form-field>
+      
+          <mat-form-field appearance="fill" class="width-50 ml-2">
+            <mat-label>Surname</mat-label>
+            <input 
+                matInput
+                placeholder="Last name"
+                required
+                formControlName="lastName"
+            >
+          </mat-form-field>
+
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Email address</mat-label>
+            <input 
+                matInput 
+                placeholder="Email address"
+                required
+                formControlName="email"
+            >
+          </mat-form-field>
+
+          <br>
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Enter password</mat-label>
+            <input 
+                matInput 
+                [type]="hide ? 'password' : 'text'"
+                placeholder="Password"
+                required
+                formControlName="password"
+            >
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Retype password</mat-label>
+            <input 
+                matInput 
+                [type]="hide ? 'password' : 'text'"
+                placeholder="Retype password"
+                required
+                formControlName="retypePassword"
+            >
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field appearance="fill" class="width-100">
+            <mat-label>Birthday</mat-label>
+            <input 
+                matInput 
+                [matDatepicker]="picker"
+                placeholder="Birthday"
+                name="birthday"
+                formControlName="birthday"
+            >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <button mat-raised-button (click)="register()" color="primary">Register</button>
+          <span>
+            Already have an account ? 
+            <a [routerLink]="['/auth/login']">login</a> here</span>
+        </div>
+    </mat-grid-tile>
+    </form>
+</mat-grid-list>
