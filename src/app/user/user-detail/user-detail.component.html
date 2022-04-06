@@ -14,7 +14,7 @@
     
         <mat-card-actions>
             <button (click)="goBack()" mat-button>BACK</button>
-            <button routerLink="user/edit-user/{{user._id}}" mat-button>EDIT USER</button>
+            <button routerLink="/edit-user/{{user._id}}" mat-button>EDIT USER</button>
             <button (click)="deleteUser(user._id)" mat-button>DELETE USER</button>
         </mat-card-actions>
     </mat-card>

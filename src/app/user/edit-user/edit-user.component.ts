@@ -12,7 +12,7 @@ import { UserService } from '../user.service';
 })
 export class EditUserComponent implements OnInit {
 
-  @Input() user?: User;
+  @Input() user!: User;
 
   constructor(
     private userService: UserService,
@@ -31,8 +31,19 @@ export class EditUserComponent implements OnInit {
       const id = param["id"];
 
       this.userService.getUser(id)
-        .subscribe((user: User | undefined) => this.user = user);
+        .subscribe((user: User) => this.user = user);
     }) 
+  }
+
+  saveUser(id: string): void {
+    this.userService.editUser(id, this.user)
+      .subscribe((user: User) => this.user = user);
+
+    this.toastr.success(`User with id: ${this.user?._id} updated`, "User updated",  {
+      progressBar: true
+    });
+
+    this.router.navigate(["/users"]);
   }
 
   goBack(): void {
@@ -46,7 +57,7 @@ export class EditUserComponent implements OnInit {
       progressBar: true
     });
 
-    this.router.navigate(["user/users"]);
+    this.router.navigate(["/users"]);
   }
 
 }

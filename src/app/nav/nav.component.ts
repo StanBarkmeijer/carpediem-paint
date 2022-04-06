@@ -19,6 +19,7 @@ export class NavComponent {
     );
 
   loggedIn: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(
     private breakpointObserver: BreakpointObserver, 
@@ -26,8 +27,14 @@ export class NavComponent {
     private router: Router
   ) {}
 
-  isAdmin(): void {
+  isLoggedIn(): void {
     this.authService.getUser().subscribe((u) => this.loggedIn = u !== null );
+  }
+
+  userIsAdmin(): void {
+    this.authService
+      .getUser()
+      .subscribe((u) => this.isAdmin = u!.roles.includes("admin"));	
   }
 
   signOut(): void {

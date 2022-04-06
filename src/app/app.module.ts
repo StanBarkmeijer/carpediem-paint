@@ -43,7 +43,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { OnlyAdminUsersGuard } from './auth/admin-user-guard';
 import { AuthGuard } from './auth/auth.guard';
 import { TokenStorage } from './auth/token.storage';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -88,7 +88,7 @@ import { Router, RouterModule } from '@angular/router';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([]),
   ],
   providers: [
     MatDatepickerModule,

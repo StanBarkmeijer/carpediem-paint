@@ -23,7 +23,12 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.email!, this.password!)
       .subscribe(() => this.router.navigateByUrl("/")); 
-    
+  }
+
+  handleEnter(event: KeyboardEvent): void {
+    if (event.key === "Enter") {
+      this.login();
+    }
   }
 
 }

@@ -20,15 +20,15 @@ const routes: Routes = [
   { path: "auth/login", pathMatch: "full", component: LoginComponent }, 
   { path: "auth/register", pathMatch: "full", component: RegisterComponent }, 
 
-  { path: "users", component: UserComponent },
+  { path: "users", component: UserComponent, canActivate: [AuthGuard] },
   { path: "edit-user/:id", component: EditUserComponent, canActivate: [OnlyAdminUsersGuard]},
   { path: "create-user", component: CreateUserComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "user/:id", component: UserDetailComponent },
+  { path: "user/:id", component: UserDetailComponent, canActivate: [AuthGuard] },
 
-  { path: "paints", component: PaintsComponent },
+  { path: "paints", component: PaintsComponent, canActivate: [AuthGuard] },
   { path: "edit-paint/:id", component: EditPaintComponent, canActivate: [OnlyAdminUsersGuard] },
   { path: "create-paint", component: CreatePaintComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "paint/:id", component: PaintDetailComponent }
+  { path: "paint/:id", component: PaintDetailComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

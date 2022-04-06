@@ -27,6 +27,7 @@
                   [(ngModel)]="password"
                   type="password"
                   name="password"
+                  (keyup)="handleEnter($event)"
                   required
                 />
               </mat-form-field>
@@ -37,8 +38,8 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button (click)="login()" color="primary">Login</button>
-      <span
-        >Don't have an account ?
+      <span>
+        Don't have an account ?
         <a [routerLink]="['/auth/register']">register</a> here</span
       >
     </mat-card-actions>

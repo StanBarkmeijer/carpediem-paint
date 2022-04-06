@@ -14,6 +14,8 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   createUser(data: User): Observable<User> {
+    console.log(data);
+
     const API_URL = `${this.endpoint}`;
 
     return this.http.post(API_URL, data)
@@ -44,6 +46,19 @@ export class UserService {
         catchError(this.errorMngmt)
       )
   }
+
+  editUser(id: string, data: User): Observable<User> {
+    const API_URL = `${this.endpoint}/${id}`;
+
+    console.log(id, data);
+
+    return this.http.put(API_URL, data)
+      .pipe(
+        map((res: any) => <User>res),
+        catchError(this.errorMngmt)
+      )
+  }
+    
 
   deleteUser(id: string) {
     const API_URL = `${this.endpoint}/${id}`

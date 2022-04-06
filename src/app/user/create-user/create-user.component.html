@@ -7,11 +7,11 @@
             <div class="controllers-wrapper">
                 <!-- Name -->
                 <mat-form-field class="input">
-                    <input matInput placeholder="First name" formControlName="firstname" required>
+                    <input matInput placeholder="First name" formControlName="firstName" required>
                 </mat-form-field>
                 
                 <mat-form-field class="input">
-                    <input matInput placeholder="Last name" formControlName="lastname" required>
+                    <input matInput placeholder="Last name" formControlName="lastName" required>
                 </mat-form-field>
                 
                 <mat-form-field class="input">
@@ -23,10 +23,14 @@
                 </mat-form-field>
 
                 <mat-form-field class="input">
+                    <input type="password" matInput placeholder="Repeat Password" formControlName="repeatPassword" required>
+                </mat-form-field>
+
+                <!-- <mat-form-field class="input">
                     <input matInput readonly [matDatepicker]="picker" placeholder="Birthday">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <!-- <div>
                     <mat-label>Gender: </mat-label>
