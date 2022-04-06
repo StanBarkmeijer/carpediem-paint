@@ -1,14 +1,47 @@
 <div>
     <mat-card class="card">
         <mat-card-content>
-            <mat-list>
+            <!-- <mat-list>
                 <div mat-subheader>Paints</div>
                 <mat-list-item *ngFor="let paint of paints">
                     <mat-icon mat-list-icon [ngStyle]="{ color: paint.color }">format_paint</mat-icon>
                     <div mat-line><a routerLink="/paint/{{paint._id}}">{{ paint.name }}</a></div>
                     <div mat-line>{{ paint.price | currency: 'EUR' }}</div>
                 </mat-list-item>
-            </mat-list>
+            </mat-list> -->
+            <div class="contaienr">
+                <div class="header">
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                    </mat-form-field>
+                </div>
+                <mat-table #table [dataSource]="dataSource">
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let paint">
+                            <mat-icon mat-list-icon [ngStyle]="{'color': paint.color }">format_paint</mat-icon>
+                            <a style="margin-left: 5px" routerLink="/paint/{{paint._id}}">{{ paint.name }}</a>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="price">
+                        <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+                        <mat-cell *matCellDef="let paint">{{ paint.price | currency: 'EUR' }}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                        <mat-cell *matCellDef="let paint">
+                            <button mat-icon-button routerLink="/edit-paint/{{paint._id}}">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="deletePaint(paint._id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

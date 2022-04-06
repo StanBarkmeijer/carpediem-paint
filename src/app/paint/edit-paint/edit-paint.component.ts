@@ -12,7 +12,7 @@ import { PaintService } from '../paint.service';
 })
 export class EditPaintComponent implements OnInit {
 
-  @Input() paint?: Paint;
+  @Input() paint!: Paint;
 
   constructor(
     private paintService: PaintService,
@@ -33,6 +33,17 @@ export class EditPaintComponent implements OnInit {
       this.paintService.getPaint(id)
         .subscribe((paint: Paint) => this.paint = paint);
     }) 
+  }
+
+  savePaint(id: string): void {
+    this.paintService.editPaint(id, this.paint)
+      .subscribe((paint: Paint) => this.paint = paint);
+
+    this.toastr.success(`Paint with id: ${this.paint?._id} updated`, "Paint updated",  {
+      progressBar: true
+    });
+
+    this.router.navigate(["/paints"]);
   }
 
   goBack(): void {

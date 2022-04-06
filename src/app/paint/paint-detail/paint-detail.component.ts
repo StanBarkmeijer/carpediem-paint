@@ -13,7 +13,7 @@ import { PaintService } from '../paint.service';
 })
 export class PaintDetailComponent implements OnInit {
 
-  @Input() paint?: Paint;
+  @Input() paint!: Paint;
 
   constructor(
     private paintService: PaintService,
@@ -34,7 +34,7 @@ export class PaintDetailComponent implements OnInit {
       console.log(id);
 
       this.paintService.getPaint(id)
-        .subscribe((paint: Paint[]) => this.paint = paint[0]);
+        .subscribe((paint: Paint) => this.paint = paint);
     });
   }
 

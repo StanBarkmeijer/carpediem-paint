@@ -69,6 +69,7 @@ export class UserComponent implements OnInit {
         this.toastr.success(`User with id: ${id} deleted`, "User deleted",  {
           progressBar: true
         });
+        this.getUsers();
       });
   }
 

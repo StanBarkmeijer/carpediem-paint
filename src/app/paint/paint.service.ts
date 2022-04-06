@@ -13,25 +13,44 @@ export class PaintService {
 
   constructor(private http: HttpClient) { }
 
-  createPaint(data: Paint): Observable<any> {
+  createPaint(data: Paint): Observable<Paint> {
     const API_URL = `${this.endpoint}`;
 
     return this.http.post(API_URL, data)
-      .pipe(catchError(this.errorMngmt));
+      .pipe(
+        map((res: Object) => <Paint>res),
+        catchError(this.errorMngmt)
+      );
   }
 
-  getPaints(): Observable<any> {
-    return this.http.get(this.endpoint);
+  getPaints(): Observable<Paint[]> {
+    return this.http.get(this.endpoint)
+      .pipe(
+        map((res: Object) => <Paint[]>res),
+        catchError(this.errorMngmt)
+      );
   }
 
-  getPaint(id: string): Observable<any> {
+  getPaint(id: string): Observable<Paint> {
     const API_URL = `${this.endpoint}/${id}`;
 
     return this.http.get(API_URL, { headers: this.headers })
       .pipe(
-        map((res: Object) => {
-          return res
+        map((res: any) => {
+          return <Paint>res[0]
         }),
+        catchError(this.errorMngmt)
+      )
+  }
+
+  editPaint(id: string, data: Paint): Observable<Paint> {
+    const API_URL = `${this.endpoint}/${id}`;
+
+    console.log(id, data);
+
+    return this.http.put(API_URL, data)
+      .pipe(
+        map((res: any) => <Paint>res),
         catchError(this.errorMngmt)
       )
   }

@@ -14,8 +14,6 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   createUser(data: User): Observable<User> {
-    console.log(data);
-
     const API_URL = `${this.endpoint}`;
 
     return this.http.post(API_URL, data)

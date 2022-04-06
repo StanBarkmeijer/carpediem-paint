@@ -29,15 +29,15 @@ export class CreatePaintComponent implements OnInit {
   }
 
   sendForm(): void {
-    console.log(this.paintForm.value);
-    
-    this.paintService.createPaint(this.paintForm.value);
-
-    this.toastr.success(`Created paint with ID: ${this.paintForm.value.id}`, "Added user", {
-      progressBar: true
-    });
-
-    this.router.navigate(["/paints"]);
+    this.paintService
+      .createPaint(this.paintForm.value)
+      .subscribe(() => {
+        this.toastr.success("Paint created", "Success", {
+          progressBar: true
+        });
+        
+        this.router.navigate(["/paints"]);
+      });
   }
   
 
