@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 
 import { UserComponent } from './user.component';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('UserComponent', () => {
   let component: UserComponent;
@@ -11,7 +12,7 @@ describe('UserComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ UserComponent ],
-      imports: [ RouterTestingModule, HttpClientTestingModule ]
+      imports: [ RouterTestingModule, HttpClientTestingModule, ToastrModule.forRoot(), ]
     })
     .compileComponents();
   });
