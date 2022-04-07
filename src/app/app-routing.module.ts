@@ -10,6 +10,7 @@ import { EditPaintComponent } from './paint/edit-paint/edit-paint.component';
 import { PaintDetailComponent } from './paint/paint-detail/paint-detail.component';
 import { PaintsComponent } from './paint/paints/paints.component';
 import { CreateShipComponent } from './ship/create-ship/create-ship.component';
+import { EditShipComponent } from './ship/edit-ship/edit-ship.component';
 import { ShipsComponent } from './ship/ships/ships.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
@@ -33,7 +34,7 @@ const routes: Routes = [
   { path: "paint/:id", component: PaintDetailComponent, canActivate: [AuthGuard] },
 
   { path: "ships", component: ShipsComponent, canActivate: [AuthGuard] },
-  // { path: "edit-ship/:id", component: EditShipComponent, canActivate: [OnlyAdminUsersGuard] },
+  { path: "edit-ship/:id", component: EditShipComponent, canActivate: [OnlyAdminUsersGuard] },
   { path: "create-ship", component: CreateShipComponent, canActivate: [OnlyAdminUsersGuard] },
   // { path: "ship/:id", component: ShipDetailComponent, canActivate: [AuthGuard] }
 ];

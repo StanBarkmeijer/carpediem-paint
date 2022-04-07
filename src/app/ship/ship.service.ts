@@ -44,7 +44,7 @@ export class ShipService {
       )
   }
 
-  editShip(id: string, data: Ship): Observable<Ship> {
+  editShip(id?: string, data?: Ship): Observable<Ship> {
     const API_URL = `${this.endpoint}/${id}`;
 
     console.log(id, data);

@@ -13,7 +13,7 @@ import { ShipService } from '../ship.service';
 export class ShipsComponent implements OnInit {
 
   ships: Ship[] = [];
-  displayedColumns = ["name"];
+  displayedColumns = ["name", "actions"];
   dataSource!: MatTableDataSource<Ship>;
 
   applyFilter(event: Event) {
