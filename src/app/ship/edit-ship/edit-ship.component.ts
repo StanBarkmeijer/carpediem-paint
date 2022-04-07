@@ -97,7 +97,7 @@ export class EditShipComponent implements OnInit {
         });
         this.middenschip = middenschipArray;
 
-        const achterschipParts = ["Boeing", "Voorwoning", "Voordek", "Potdeksel", "Letters", "Woningroefdek", "Ankelier"]
+        const achterschipParts = ["Gangboorden", "Boeing", "Potdeksel", "Woning", "Woningroefdek", "Autokraan", "Ankelier", "Erfschild", "Stuurhutpaal", "Spiegel"]
         const achterschipArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         achterschipParts.forEach((part) => {
           achterschipArray.push(paints.map((paint) => {
@@ -110,7 +110,7 @@ export class EditShipComponent implements OnInit {
         });
         this.achterschip = achterschipArray;
 
-        const overigenParts = ["Gangboorden", "Tankdek", "Dennenboom"]
+        const overigenParts = ["Ballast tanken", "Zijen van het schip", "Ruimen", "Machinekamer", "Voorpiek", "Achterpiek"]
         const overigenArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         overigenParts.forEach((part) => {
           overigenArray.push(paints.map((paint) => {

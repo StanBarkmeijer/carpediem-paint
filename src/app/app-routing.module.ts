@@ -11,6 +11,7 @@ import { PaintDetailComponent } from './paint/paint-detail/paint-detail.componen
 import { PaintsComponent } from './paint/paints/paints.component';
 import { CreateShipComponent } from './ship/create-ship/create-ship.component';
 import { EditShipComponent } from './ship/edit-ship/edit-ship.component';
+import { ShipDetailComponent } from './ship/ship-detail/ship-detail.component';
 import { ShipsComponent } from './ship/ships/ships.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
@@ -36,7 +37,7 @@ const routes: Routes = [
   { path: "ships", component: ShipsComponent, canActivate: [AuthGuard] },
   { path: "edit-ship/:id", component: EditShipComponent, canActivate: [OnlyAdminUsersGuard] },
   { path: "create-ship", component: CreateShipComponent, canActivate: [OnlyAdminUsersGuard] },
-  // { path: "ship/:id", component: ShipDetailComponent, canActivate: [AuthGuard] }
+  { path: "ship/:id", component: ShipDetailComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
