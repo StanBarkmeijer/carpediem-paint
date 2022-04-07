@@ -1,69 +1,69 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, throwError } from 'rxjs';
-import { Paint } from './paint';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, map, catchError, throwError } from 'rxjs';
+import { Ship } from './ship';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PaintService {
+export class ShipService {
 
   // endpoint: string = "//carpediem-paint.herokuapp.com/api/paint";
-  endpoint: string = "//localhost:8081/api/paint";
+  endpoint: string = "//localhost:8081/api/ship";
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(private http: HttpClient) { }
 
-  createPaint(data: Paint): Observable<Paint> {
+  createShip(data: Ship): Observable<Ship> {
     const API_URL = `${this.endpoint}`;
 
     return this.http.post(API_URL, data)
       .pipe(
-        map((res: Object) => <Paint>res),
+        map((res: Object) => <Ship>res),
         catchError(this.errorMngmt)
       );
   }
 
-  getPaints(): Observable<Paint[]> {
+  getShips(): Observable<Ship[]> {
     return this.http.get(this.endpoint)
       .pipe(
-        map((res: Object) => <Paint[]>res),
+        map((res: Object) => <Ship[]>res),
         catchError(this.errorMngmt)
       );
   }
 
-  getPaint(id: string): Observable<Paint> {
+  getShip(id: string): Observable<Ship> {
     const API_URL = `${this.endpoint}/${id}`;
 
     return this.http.get(API_URL, { headers: this.headers })
       .pipe(
         map((res: any) => {
-          return <Paint>res[0]
+          return <Ship>res[0]
         }),
         catchError(this.errorMngmt)
       )
   }
 
-  editPaint(id: string, data: Paint): Observable<Paint> {
+  editShip(id: string, data: Ship): Observable<Ship> {
     const API_URL = `${this.endpoint}/${id}`;
 
     console.log(id, data);
 
     return this.http.put(API_URL, data)
       .pipe(
-        map((res: any) => <Paint>res),
+        map((res: any) => <Ship>res),
         catchError(this.errorMngmt)
       )
   }
 
-  deletePaint(id: string) {
+  deleteShip(id: string) {
     const API_URL = `${this.endpoint}/${id}`
 
-    return this.http.delete(API_URL)
+    return this.http.delete(API_URL, { headers: this.headers })
       .pipe(
         catchError(this.errorMngmt)
-      )
-  } 
+      );
+  }
 
   errorMngmt(error: HttpErrorResponse) {
     let errorMessage = '';
@@ -74,8 +74,7 @@ export class PaintService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    
+    console.log(errorMessage);
     return throwError(errorMessage);
   }
-  
 }

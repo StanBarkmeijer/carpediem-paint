@@ -9,6 +9,8 @@ import { CreatePaintComponent } from './paint/create-paint/create-paint.componen
 import { EditPaintComponent } from './paint/edit-paint/edit-paint.component';
 import { PaintDetailComponent } from './paint/paint-detail/paint-detail.component';
 import { PaintsComponent } from './paint/paints/paints.component';
+import { CreateShipComponent } from './ship/create-ship/create-ship.component';
+import { ShipsComponent } from './ship/ships/ships.component';
 import { CreateUserComponent } from './user/create-user/create-user.component';
 import { EditUserComponent } from './user/edit-user/edit-user.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
@@ -28,7 +30,12 @@ const routes: Routes = [
   { path: "paints", component: PaintsComponent, canActivate: [AuthGuard] },
   { path: "edit-paint/:id", component: EditPaintComponent, canActivate: [OnlyAdminUsersGuard] },
   { path: "create-paint", component: CreatePaintComponent /*, canActivate: [OnlyAdminUsersGuard] */ },
-  { path: "paint/:id", component: PaintDetailComponent, canActivate: [AuthGuard] }
+  { path: "paint/:id", component: PaintDetailComponent, canActivate: [AuthGuard] },
+
+  { path: "ships", component: ShipsComponent, canActivate: [AuthGuard] },
+  // { path: "edit-ship/:id", component: EditShipComponent, canActivate: [OnlyAdminUsersGuard] },
+  { path: "create-ship", component: CreateShipComponent, canActivate: [OnlyAdminUsersGuard] },
+  // { path: "ship/:id", component: ShipDetailComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

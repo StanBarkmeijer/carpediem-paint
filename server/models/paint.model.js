@@ -17,5 +17,5 @@ const PaintSchema = new mongoose.Schema({
     }
 });
 
-module.exports.schema = PaintSchema;
 module.exports.model = mongoose.model("Paints", PaintSchema);
+module.exports.schema = PaintSchema;

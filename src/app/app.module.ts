@@ -44,6 +44,11 @@ import { OnlyAdminUsersGuard } from './auth/admin-user-guard';
 import { AuthGuard } from './auth/auth.guard';
 import { TokenStorage } from './auth/token.storage';
 import { ActivatedRouteSnapshot, Router, RouterModule } from '@angular/router';
+import { ShipsComponent } from './ship/ships/ships.component';
+import { ShipDetailComponent } from './ship/ship-detail/ship-detail.component';
+import { EditShipComponent } from './ship/edit-ship/edit-ship.component';
+import { CreateShipComponent } from './ship/create-ship/create-ship.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -60,6 +65,10 @@ import { ActivatedRouteSnapshot, Router, RouterModule } from '@angular/router';
     EditPaintComponent,
     LoginComponent,
     RegisterComponent,
+    ShipsComponent,
+    ShipDetailComponent,
+    EditShipComponent,
+    CreateShipComponent,
   ],
   imports: [
     HttpClientModule,
@@ -89,6 +98,7 @@ import { ActivatedRouteSnapshot, Router, RouterModule } from '@angular/router';
     MatPaginatorModule,
     MatSortModule,
     RouterModule.forRoot([]),
+    MatCheckboxModule
   ],
   providers: [
     MatDatepickerModule,

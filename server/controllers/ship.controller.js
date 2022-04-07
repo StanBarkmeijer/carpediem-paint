@@ -23,33 +23,18 @@ module.exports = {
 async function create(req, res) {
     ship = await shipSchema.validateAsync(req.body, { abortEarly: false });
 
-    let paints = [];
-
-    ship.paints.forEach((paintID) => {
-        Paint.model
-            .find({ _id: paintID })
-            .then((data) => paints.push(data[0]));
-    });
-
-    ship.paints = paints;
-
     Ship
         .model(ship)
         .save()
         .then((data) => {
-            Ship
-                .model
-                .findByIdAndUpdate(
-                    data._id,
-                    { $push: { paints: paints }},
-                    { new: true, useFindAndModify: false })
-                .then((data) => res.send(data)); 
+            res
+                .send(data);
         })
         .catch((err) => {
             res
                 .status(500)
                 .send({
-                    message: err.message || "Some error occurred while creating ships"
+                    message: err.message || `Can't create Ship.`
                 });
         });
 }

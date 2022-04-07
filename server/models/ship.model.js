@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { schema } = require("./paint.model");
+const { schema, model } = require("./paint.model");
 
 const ShipSchema = new mongoose.Schema({
     name: {
@@ -9,27 +9,27 @@ const ShipSchema = new mongoose.Schema({
     voorschip: [
         {
             part: String,
-            paint: schema
+            paint: [ schema ]
         }
     ],
     middenschip: [
         {
             part: String,
-            paint: schema
+            paint: [ schema ]
         }
     ],
     achterschip: [
         {
             part: String,
-            paint: schema
+            paint: [ schema ]
         }
     ],
     overigen: [
         {
             part: String,
-            paint: schema
+            paint: [ schema ]
         }
     ],
 });
 
-module.exports = mongoose.model("Ships", ShipSchema);
+module.exports.model = mongoose.model("Ships", ShipSchema);

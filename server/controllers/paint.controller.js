@@ -18,11 +18,7 @@ module.exports = {
 }
 
 async function create(req, res) {
-    console.log(req.body);
     paint = await paintSchema.validateAsync(req.body, { abortEarly: false });
-
-    console.log(req.body);
-    console.log(paint);
 
     Paint
         .model(paint)

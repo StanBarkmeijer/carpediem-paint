@@ -1,0 +1,57 @@
+<div class="inner-wrapper">
+  <form [formGroup]="shipForm" (ngSubmit)="sendForm()">
+    <h1>Create ship</h1>
+
+    <div class="controllers-wrapper">
+      <!-- Name -->
+      <mat-form-field class="input">
+        <input matInput placeholder="Name" formControlName="name" required>
+      </mat-form-field>
+
+      <!-- Voorschip -->
+      <!-- <mat-card *ngFor="let part of parts" style="margin-top: 5px">
+          <mat-card-title>{{ part }}</mat-card-title>
+          <mat-card-content>
+            <div *ngFor="let paint of paints">
+                <mat-checkbox 
+                    #box 
+                    [name]="part + '-' + paint.name"
+                    [value]="paint._id" 
+                    (change)="changeBox($event)">
+                    <mat-icon mat-list-icon [ngStyle]="{'color': paint.color }">format_paint</mat-icon>
+                    {{ paint.name }}</mat-checkbox>
+              </div>
+          </mat-card-content>
+      </mat-card> -->
+
+      <mat-card *ngFor="let onderdeel of parts2" style="margin-top: 5px">
+        <mat-card-title>{{ onderdeel.name }}</mat-card-title>
+        <div *ngFor="let sub of onderdeel.paints">
+            <mat-card-content>
+                <p><b>{{ sub[0].part }}</b></p>
+                <!-- <p *ngFor="let subsub of sub">
+                    <mat-icon mat-list-icon [ngStyle]="{'color': subsub.paint.color }">format_paint</mat-icon>
+                    {{ subsub.paint.name }}</p> -->
+                <div *ngFor="let subpaint of sub">
+                    <mat-checkbox
+                    #box
+                    [name]="onderdeel.name + '-' + sub[0].part + '-' + subpaint.paint.name"
+                    [value]="subpaint.paint._id"
+                    (change)="changeBox($event)">
+                        <mat-icon mat-list-icon [ngStyle]="{'color': subpaint.paint.color }">format_paint</mat-icon>
+                        {{ subpaint.paint.name }}
+                    </mat-checkbox>
+                </div>
+            </mat-card-content>
+        </div>
+      </mat-card>
+
+    </div>
+
+    <div class="full-wrapper button-wrapper" style="margin-top: 20px">
+      <div class="button-wrapper">
+        <button mat-flat-button color="primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
