@@ -15,6 +15,7 @@ export class ShipDetailComponent implements OnInit {
 
   @Input() ship!: Ship;
   paints: any[] = [];
+  id = "-1";
 
   constructor(
     private shipService: ShipService,
@@ -31,11 +32,11 @@ export class ShipDetailComponent implements OnInit {
   getShip(): void {
     this.route.params.subscribe((param: any) => {
       const id = param["id"];
+      this.id = id;
 
       this.shipService.getShip(id)
         .subscribe((ship: Ship) => {
           this.ship = ship;
-          console.log(this.ship);
 
           let paints: any[] = [];
 
@@ -63,6 +64,16 @@ export class ShipDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  deleteShip(id: string): void {
+    this.shipService.deleteShip(id);
+
+    this.toastr.success(`Ship with id: ${id} deleted`, "Ship deleted",  {
+      progressBar: true
+    });
+
+    this.router.navigate(["/ships"]);
   }
 
 }

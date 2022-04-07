@@ -3,7 +3,7 @@
 
     <div class="controllers-wrapper">
       <!-- Name -->
-      <mat-form-field class="input">
+      <mat-form-field class="input" *ngIf="ship">
         <input matInput placeholder="Name" [(ngModel)]="ship.name" required>
       </mat-form-field>
 
