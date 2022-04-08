@@ -15,8 +15,7 @@ interface AuthResponse {
 export class AuthService {
   private user$ = new BehaviorSubject<User | null>(null);
   
-  endpoint: string = "//carpediem-paint.herokuapp.com/api";
-  // endpoint: string = "//localhost:8081/api";
+  endpoint: string = process.env['NODE_ENV'] === 'production' ? '//carpediem-paint.herokuapp.com/api' : '//localhost:8081/api';
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(

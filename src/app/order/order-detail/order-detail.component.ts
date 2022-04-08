@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Paint } from 'src/app/paint/paint';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
@@ -17,10 +18,12 @@ export class OrderDetailComponent implements OnInit {
   
   @Input() order!: Order;
   price = 0;
+  authenticated: boolean = false;
   displayedColumns = ["name", "quantity", "price"];
 
   constructor(
     private orderService: OrderService,
+    private authService: AuthService,
     private userService: UserService,
     private route: ActivatedRoute,
     private toastr: ToastrService,
@@ -51,6 +54,18 @@ export class OrderDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  getMe(): void {
+    this.authService.getUser()
+      .subscribe((me: any) => this.authenticated = me.roles.includes("admin"));
+  }
+
+  deleteOrder(): void {
+    this.orderService.deleteOrder(this.order._id).subscribe(() => {
+      this.toastr.success("Order deleted successfully");
+      this.goBack();
+    });
   }
 
 }

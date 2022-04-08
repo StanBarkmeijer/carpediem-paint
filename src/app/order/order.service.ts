@@ -7,8 +7,7 @@ import { Observable, map, catchError, throwError } from 'rxjs';
 })
 export class OrderService {
   
-  endpoint: string = "//carpediem-paint.herokuapp.com/api/order";
-  // endpoint: string = "//localhost:8081/api/order";
+  endpoint: string = process.env['NODE_ENV'] === 'production' ? '//carpediem-order.herokuapp.com/api/order' : '//localhost:8081/api/order';
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(private http: HttpClient) { }
@@ -46,7 +45,7 @@ export class OrderService {
   editOrder(id: string, data: any): Observable<any> {
     const API_URL = `${this.endpoint}/${id}`;
 
-    console.log(id, data);
+    console.log(data);
 
     return this.http.put(API_URL, data)
       .pipe(

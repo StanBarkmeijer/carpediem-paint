@@ -17,7 +17,11 @@ const OrderSchema = new mongoose.Schema({
             paint: Paint.schema,
             count: Number
         }
-    ]
+    ],
+    approved: {
+        type: Boolean,
+        default: false
+    },
 });
 
 module.exports.schema = OrderSchema;

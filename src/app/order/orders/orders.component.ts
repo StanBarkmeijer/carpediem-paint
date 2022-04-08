@@ -58,8 +58,20 @@ export class OrdersComponent implements OnInit {
       });
   }
 
-  getUser(): void {
+  setTrue(order: Order): void {
+    order.approved = true;
 
+    this.orderService
+      .editOrder(order._id, order)
+      .subscribe(()=>{});
+  }
+
+  setFalse(order: Order): void {
+    order.approved = false;
+
+    this.orderService
+      .editOrder(order._id, order)
+      .subscribe(()=>{});
   }
 
 }

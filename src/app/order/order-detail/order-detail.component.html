@@ -41,6 +41,7 @@
     
         <mat-card-actions>
             <button (click)="goBack()" mat-button>BACK</button>
+            <button *ngIf="authenticated" (click)="deleteOrder()" mat-button>DELETE ORDER</button>
         </mat-card-actions>
     </mat-card>
 </div>

@@ -8,4 +8,5 @@ export interface Order {
     ship: Ship,
     paints: Array<Paint>,
     price?: number
+    approved: boolean
 }
