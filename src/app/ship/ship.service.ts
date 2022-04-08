@@ -8,7 +8,7 @@ import { Ship } from './ship';
 })
 export class ShipService {
 
-  endpoint: string = "//carpediem-paint.herokuapp.com/api/paint";
+  endpoint: string = "//carpediem-paint.herokuapp.com/api/ship";
   // endpoint: string = "//localhost:8081/api/ship";
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
