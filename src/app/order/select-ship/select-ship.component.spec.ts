@@ -1,4 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
 
 import { SelectShipComponent } from './select-ship.component';
 
@@ -8,7 +12,14 @@ describe('SelectShipComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectShipComponent ]
+      declarations: [ SelectShipComponent ],
+      imports: [ 
+        RouterTestingModule, 
+        FormsModule, 
+        ReactiveFormsModule, 
+        ToastrModule.forRoot(),
+        HttpClientTestingModule
+      ]
     })
     .compileComponents();
   });
