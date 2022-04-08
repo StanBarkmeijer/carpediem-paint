@@ -2,25 +2,48 @@
     <mat-card *ngIf="ship" class="card">
         <mat-card-header>
             <mat-card-title>Ship information: {{ ship.name | uppercase }}</mat-card-title>
+            <mat-card-subtitle>MMSI: {{ ship.mmsi }}</mat-card-subtitle>
         </mat-card-header>
     
         <mat-card-content>
-            <h1>All paint</h1>
-            <div *ngFor="let paint of paints">
-                <p >
-                    <b>{{ paint.part }}</b>
-                </p>
-                <p>
-                    <mat-icon mat-list-icon [ngStyle]="{'color': paint.color }">format_paint</mat-icon>
-                    {{ paint.paint }}
-                </p>
+            <div *ngFor="let onderdeel of paints | keyvalue">
+                <div *ngIf="onderdeel.value.length != 0">
+                    <h1>{{ onderdeel.key }}</h1>
+
+                    <div *ngFor="let x of onderdeel.value">
+                        <p><b>{{ x.part }}</b></p>
+                        <p>
+                            <mat-icon mat-list-icon [ngStyle]="{'color': x.paint.color }">format_paint</mat-icon>
+                            {{ x.paint.name }}
+                        </p>
+                    </div>
+                </div>
             </div>
+
+            <!-- <div id="ais">
+                <script>
+                    var mst_width="100%";
+                    var mst_height="350px";
+                    var mst_border="0";
+                    var mst_map_style="simple";
+                    var mst_mmsi="244670140";
+                    var mst_show_track="false";
+                    var mst_show_info="true";
+                    var mst_fleet="";
+                    var mst_lat="";
+                    var mst_lng="";
+                    var mst_zoom="";
+                    var mst_show_names="0";
+                    var mst_scroll_wheel="true";
+                    var mst_show_menu="true";
+                </script><script id="myshiptrackingscript" src="//www.myshiptracking.com/js/widgetApi.js" async defer></script>
+            </div> -->
         </mat-card-content>
     
         <mat-card-actions>
             <button (click)="goBack()" mat-button>BACK</button>
             <button routerLink="/edit-ship/{{ship._id}}" mat-button>EDIT SHIP</button>
-            <button (click)="deleteShip(id)" mat-button>DELETE PAINT</button>
+            <button (click)="deleteShip(id)" mat-button>DELETE SHIP</button>
         </mat-card-actions>
     </mat-card>
 </div>

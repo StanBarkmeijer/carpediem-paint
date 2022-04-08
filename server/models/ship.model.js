@@ -6,30 +6,34 @@ const ShipSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    mmsi: {
+        type: String,
+    },
     voorschip: [
         {
             part: String,
-            paint: [ schema ]
+            paint: schema
         }
     ],
     middenschip: [
         {
             part: String,
-            paint: [ schema ]
+            paint: schema
         }
     ],
     achterschip: [
         {
             part: String,
-            paint: [ schema ]
+            paint: schema 
         }
     ],
     overigen: [
         {
             part: String,
-            paint: [ schema ]
+            paint: schema 
         }
     ],
 });
 
+module.exports.schema = ShipSchema;
 module.exports.model = mongoose.model("Ships", ShipSchema);

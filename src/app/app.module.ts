@@ -49,6 +49,12 @@ import { ShipDetailComponent } from './ship/ship-detail/ship-detail.component';
 import { EditShipComponent } from './ship/edit-ship/edit-ship.component';
 import { CreateShipComponent } from './ship/create-ship/create-ship.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CreateOrderComponent } from './order/create-order/create-order.component';
+import { OrderDetailComponent } from './order/order-detail/order-detail.component';
+import { OrdersComponent } from './order/orders/orders.component';
+import { EditOrderComponent } from './order/edit-order/edit-order.component';
+import { SelectShipComponent } from './order/select-ship/select-ship.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -69,6 +75,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ShipDetailComponent,
     EditShipComponent,
     CreateShipComponent,
+    CreateOrderComponent,
+    OrderDetailComponent,
+    OrdersComponent,
+    EditOrderComponent,
+    SelectShipComponent,
   ],
   imports: [
     HttpClientModule,
@@ -98,7 +109,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatPaginatorModule,
     MatSortModule,
     RouterModule.forRoot([]),
-    MatCheckboxModule
+    MatCheckboxModule,
+    NgxSpinnerModule
   ],
   providers: [
     MatDatepickerModule,

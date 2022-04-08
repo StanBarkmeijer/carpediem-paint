@@ -12,10 +12,12 @@
                     <input type="password" matInput placeholder="Password" formControlName="password" required>
                 </mat-form-field>
 
-                <button mat-raised-button (click)="login()" color="primary">Login</button>
+                <button mat-raised-button (click)="login()" style="background-color: #50C0DD; color: white;">Login</button>
                 <span>
                   Don't have an account ? 
                   <a [routerLink]="['/auth/register']">register</a> here</span>
+
+                <p *ngIf="error" style="color: red">{{ error }}</p>
             </div>
           </mat-grid-tile>
     </form>

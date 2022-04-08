@@ -7,6 +7,12 @@
         <input matInput placeholder="Name" [(ngModel)]="ship.name" required>
       </mat-form-field>
 
+      <br />
+
+      <mat-form-field class="input" *ngIf="ship">
+        <input matInput placeholder="MMSI" [(ngModel)]="ship.mmsi" required>
+      </mat-form-field>
+
       <!-- Voorschip -->
       <!-- <mat-card *ngFor="let part of parts" style="margin-top: 5px">
           <mat-card-title>{{ part }}</mat-card-title>

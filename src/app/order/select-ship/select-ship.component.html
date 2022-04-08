@@ -1,0 +1,40 @@
+<div>
+    <mat-card class="card">
+        <mat-card-content>
+            <!-- <mat-list>
+                <div mat-subheader>Ships</div>
+                <mat-list-item *ngFor="let ship of ships">
+                    <mat-icon mat-list-icon [ngStyle]="{ color: ship.color }">format_ship</mat-icon>
+                    <div mat-line><a routerLink="/ship/{{ship._id}}">{{ ship.name }}</a></div>
+                    <div mat-line>{{ ship.price | currency: 'EUR' }}</div>
+                </mat-list-item>
+            </mat-list> -->
+            <div class="container">
+                <div class="header">
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                    </mat-form-field>
+                </div>
+                <mat-table #table [dataSource]="dataSource">
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+                        <mat-cell *matCellDef="let ship">
+                            <mat-icon mat-list-icon [ngStyle]="{'color': '#007ba5' }">sailing</mat-icon>
+                            <a style="margin-left: 5px">{{ ship.name }}</a>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                        <mat-cell *matCellDef="let ship">
+                            <button mat-icon-button routerLink="/order/{{ship._id}}">
+                                Bestel verf <mat-icon>visibility</mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

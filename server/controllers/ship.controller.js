@@ -6,6 +6,7 @@ const User = require("../models/user.model");
 
 const shipSchema = Joi.object({
     name: Joi.string().required(),
+    mmsi: Joi.string().required(),
     voorschip: Joi.array(),
     middenschip: Joi.array(),
     achterschip: Joi.array(),
@@ -21,7 +22,16 @@ module.exports = {
 }
 
 async function create(req, res) {
-    ship = await shipSchema.validateAsync(req.body, { abortEarly: false });
+    let error;
+    ship = await shipSchema
+        .validateAsync(req.body, { abortEarly: false })
+        .catch((err) => error = err.details);
+
+    if (error) {
+        return res
+            .status(400)
+            .json(error);
+    }
 
     Ship
         .model(ship)

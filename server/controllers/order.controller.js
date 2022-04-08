@@ -6,6 +6,7 @@ const User = require("../models/user.model");
 
 const orderSchema = Joi.object({
     user: Joi.string().required(),
+    ship: Joi.object().required(),
     date: Joi.date(),
     paints: Joi.array().required()
 });

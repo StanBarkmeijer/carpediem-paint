@@ -30,7 +30,8 @@ export class CreateShipComponent implements OnInit {
   checked = [];
 
   shipForm = this.fb.group({
-    name: ["", Validators.required]
+    name: ["", Validators.required],
+    mmsi: ["", Validators.required],
   })
 
   constructor(
@@ -148,7 +149,7 @@ export class CreateShipComponent implements OnInit {
   }
 
   sendForm(): void {
-    const { name } = this.shipForm.value;
+    const { name, mmsi } = this.shipForm.value;
 
     const voorschip = this.getChecked(this.parts2[0].paints)
     const middenschip = this.getChecked(this.parts2[1].paints)
@@ -157,16 +158,23 @@ export class CreateShipComponent implements OnInit {
 
     const ship = {
       name,
+      mmsi,
       voorschip,
       middenschip,
       achterschip,
       overigen
     }
 
-    this.shipService.createShip(ship).subscribe(ship => {
-      this.toastr.success("Schip is aangemaakt! " + ship._id, "Succes!");
-      this.router.navigate(["/ships"]);
-    });
+    this.shipService
+      .createShip(ship)
+      .subscribe({ 
+        next: (ship: any) => {
+          this.toastr.success("Schip is aangemaakt! " + ship._id, "Succes!");
+          this.router.navigate(["/ships"]);
+        }, 
+        error: err => {
+          this.toastr.error("Missing name or mssi", "Error!");
+        }});
   }
 
   getChecked(input: any) {

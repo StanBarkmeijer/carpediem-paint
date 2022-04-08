@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 import { Ship } from '../ship';
@@ -38,26 +38,28 @@ export class ShipDetailComponent implements OnInit {
         .subscribe((ship: Ship) => {
           this.ship = ship;
 
-          let paints: any[] = [];
+          let paints: any = {
+            "Voorschip": [],
+            "Middenschip": [],
+            "Achterschip": [],
+            "Overigen": []
+          };
 
-          ship.voorschip.forEach((row: any) => {
-            paints.push({part: row.part, paint: row.paint[0].name, color: row.paint[0].color });
-          });
+          ship.voorschip
+            .forEach((part: any) => paints["Voorschip"].push({part: part.part, paint: part.paint }));
 
-          ship.middenschip.forEach((row: any) => {
+          ship.middenschip
+            .forEach((part: any) => paints["Middenschip"].push({part: part.part, paint: part.paint }));
 
-            paints.push({part: row.part, paint: row.paint[0].name, color: row.paint[0].color });
-          });
+          ship.achterschip
+            .forEach((part: any) => paints["Achterschip"].push({part: part.part, paint: part.paint }));
 
-          ship.achterschip.forEach((row: any) => {
-            paints.push({part: row.part, paint: row.paint[0].name, color: row.paint[0].color });
-          });
-
-          ship.overigen.forEach((row: any) => {
-            paints.push({part: row.part, paint: row.paint[0].name, color: row.paint[0].color });
-          });
+          ship.overigen
+            .forEach((part: any) => paints["Overigen"].push({part: part.part, paint: part.paint }));
 
           this.paints = paints;
+
+          console.log(this.paints);
         });
     });
   }

@@ -5,6 +5,8 @@ import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CreateOrderComponent } from './order/create-order/create-order.component';
+import { SelectShipComponent } from './order/select-ship/select-ship.component';
 import { CreatePaintComponent } from './paint/create-paint/create-paint.component';
 import { EditPaintComponent } from './paint/edit-paint/edit-paint.component';
 import { PaintDetailComponent } from './paint/paint-detail/paint-detail.component';
@@ -24,6 +26,9 @@ const routes: Routes = [
   { path: "auth/login", pathMatch: "full", component: LoginComponent }, 
   { path: "auth/register", pathMatch: "full", component: RegisterComponent }, 
 
+  { path: "order", pathMatch: "full", component: SelectShipComponent, canActivate: [AuthGuard] },
+  { path: "order/:id", pathMatch: "full", component: CreateOrderComponent, canActivate: [AuthGuard] },
+
   { path: "users", component: UserComponent, canActivate: [AuthGuard] },
   { path: "edit-user/:id", component: EditUserComponent, canActivate: [OnlyAdminUsersGuard]},
   { path: "create-user", component: CreateUserComponent, canActivate: [OnlyAdminUsersGuard] },
@@ -31,7 +36,7 @@ const routes: Routes = [
 
   { path: "paints", component: PaintsComponent, canActivate: [AuthGuard] },
   { path: "edit-paint/:id", component: EditPaintComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "create-paint", component: CreatePaintComponent /*, canActivate: [OnlyAdminUsersGuard] */ },
+  { path: "create-paint", component: CreatePaintComponent, canActivate: [OnlyAdminUsersGuard] },
   { path: "paint/:id", component: PaintDetailComponent, canActivate: [AuthGuard] },
 
   { path: "ships", component: ShipsComponent, canActivate: [AuthGuard] },

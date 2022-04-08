@@ -167,7 +167,7 @@ export class EditShipComponent implements OnInit {
   }
 
   editShip(): void {
-    const { name } = this.ship;
+    const { name, mmsi } = this.ship;
 
     const voorschip = this.getChecked(this.parts2[0].paints)
     const middenschip = this.getChecked(this.parts2[1].paints)
@@ -176,6 +176,7 @@ export class EditShipComponent implements OnInit {
 
     const ship = {
       name,
+      mmsi,
       voorschip,
       middenschip,
       achterschip,
@@ -183,7 +184,7 @@ export class EditShipComponent implements OnInit {
     }
 
     this.shipService.editShip(this.ship._id, ship).subscribe(ship => {
-      this.toastr.success("Schip is geupdated! " + ship.name, "Succes!");
+      this.toastr.success("Schip is geupdated! " + name, "Succes!");
       this.router.navigate(["/ships"]);
     });
   }
@@ -210,7 +211,7 @@ export class EditShipComponent implements OnInit {
           paint.forEach((paint2: any) => {
             const name = paint2.paint.name;
 
-            if ((name === shipPaint.paint[0].name) && (shipPaint.part === paint2.part)) {
+            if ((name === shipPaint.paint.name) && (shipPaint.part === paint2.part)) {
               paint2.selected = true;
             }
           }) 

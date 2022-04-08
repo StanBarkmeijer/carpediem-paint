@@ -11,6 +11,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
   email: string | null = null;
   password: string | null = null;
+  error?: string;
 
   loginForm = this.fb.group({
     email: ["", [Validators.required, Validators.email]],
@@ -29,7 +30,10 @@ export class LoginComponent implements OnInit {
   login(): void {    
     this.authService
       .login(this.loginForm.get("email")?.value, this.loginForm.get("password")?.value)
-      .subscribe(() => this.router.navigateByUrl("/")); 
+      .subscribe({ 
+        next: () => this.router.navigateByUrl("/"),
+        error: () => this.error = "Incorrect email or password"
+      }); 
   }
 
   handleEnter(event: KeyboardEvent): void {
