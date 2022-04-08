@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 })
 export class UserService {
 
-  endpoint: string = process.env['NODE_ENV'] === 'production' ? '//carpediem-user.herokuapp.com/api/user' : '//localhost:8081/api/user';
+  endpoint: string = process.env['NODE_ENV'] === 'production' ? '//carpediem-paint.herokuapp.com/api/user' : '//localhost:8081/api/user';
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(private http: HttpClient) { }

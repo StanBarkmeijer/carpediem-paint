@@ -8,7 +8,7 @@ import { Ship } from './ship';
 })
 export class ShipService {
 
-  endpoint: string = process.env['NODE_ENV'] === 'production' ? '//carpediem-ship.herokuapp.com/api/ship' : '//localhost:8081/api/ship';
+  endpoint: string = process.env['NODE_ENV'] === 'production' ? '//carpediem-paint.herokuapp.com/api/ship' : '//localhost:8081/api/ship';
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(private http: HttpClient) { }
