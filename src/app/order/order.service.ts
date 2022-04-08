@@ -7,8 +7,8 @@ import { Observable, map, catchError, throwError } from 'rxjs';
 })
 export class OrderService {
   
-  // endpoint: string = "//carpediem-paint.herokuapp.com/api/order";
-  endpoint: string = "//localhost:8081/api/order";
+  endpoint: string = "//carpediem-paint.herokuapp.com/api/order";
+  // endpoint: string = "//localhost:8081/api/order";
   headers = new HttpHeaders().set("Content-Type", "application/json");
 
   constructor(private http: HttpClient) { }
