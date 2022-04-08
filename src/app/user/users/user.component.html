@@ -6,7 +6,7 @@
                     <mat-form-field>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
                     </mat-form-field>
-                    <button routerLink="/create-paint/" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add user</button>
+                    <button routerLink="/create-user/" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add user</button>
                 </div>
                 <mat-table #table [dataSource]="dataSource" matSort>
                     <ng-container matColumnDef="firstName">

@@ -14,7 +14,7 @@
                     <mat-form-field>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
                     </mat-form-field>
-                    <button routerLink="/create-paint/" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add ship</button>
+                    <button routerLink="/create-ship/" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add ship</button>
                 </div>
                 <mat-table #table [dataSource]="dataSource">
                     <ng-container matColumnDef="name">
