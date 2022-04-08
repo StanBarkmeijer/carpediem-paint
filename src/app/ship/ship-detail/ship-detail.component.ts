@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Ship } from '../ship';
 import { ShipService } from '../ship.service';
 
@@ -16,9 +17,11 @@ export class ShipDetailComponent implements OnInit {
   @Input() ship!: Ship;
   paints: any[] = [];
   id = "-1";
+  authenticated: boolean = false;
 
   constructor(
     private shipService: ShipService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private location: Location,
     private toastr: ToastrService,
@@ -27,6 +30,11 @@ export class ShipDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getShip();
+  }
+  
+  getMe(): void {
+    this.authService.getUser()
+      .subscribe((me: any) => this.authenticated = me.roles.includes("admin"));
   }
 
   getShip(): void {

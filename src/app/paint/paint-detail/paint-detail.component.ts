@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Paint } from '../paint';
 import { PaintService } from '../paint.service';
 
@@ -14,9 +15,11 @@ import { PaintService } from '../paint.service';
 export class PaintDetailComponent implements OnInit {
 
   @Input() paint!: Paint;
+  authenticated: boolean = false;
 
   constructor(
     private paintService: PaintService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private location: Location,
     private toastr: ToastrService,
@@ -25,6 +28,11 @@ export class PaintDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPaint();
+  }
+  
+  getMe(): void {
+    this.authService.getUser()
+      .subscribe((me: any) => this.authenticated = me.roles.includes("admin"));
   }
 
   getPaint(): void {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Paint } from '../paint';
 import { PaintService } from '../paint.service';
 
@@ -13,6 +14,7 @@ import { PaintService } from '../paint.service';
 export class PaintsComponent implements OnInit {
 
   paints: Paint[] = [];
+  authenticated: boolean = false;
   displayedColumns = ["name", "price", "actions"];
   dataSource!: MatTableDataSource<Paint>;
 
@@ -26,12 +28,19 @@ export class PaintsComponent implements OnInit {
 
   constructor(
     private paintService: PaintService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.getPaints();
+    this.getMe();
+  }
+
+  getMe(): void {
+    this.authService.getUser()
+      .subscribe((me: any) => this.authenticated = me.roles.includes("admin"));
   }
 
   getPaints(): void {

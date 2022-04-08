@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Ship } from '../ship';
 import { ShipService } from '../ship.service';
 
@@ -15,6 +16,7 @@ export class ShipsComponent implements OnInit {
   ships: Ship[] = [];
   displayedColumns = ["name", "actions"];
   dataSource!: MatTableDataSource<Ship>;
+  authenticated: boolean = false;
 
   applyFilter(event: Event) {
     let filterValue: string = (event.target as HTMLInputElement).value;
@@ -26,12 +28,19 @@ export class ShipsComponent implements OnInit {
 
   constructor(
     private shipService: ShipService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.getShips();
+    this.getMe();
+  }
+
+  getMe(): void {
+    this.authService.getUser()
+      .subscribe((me: any) => this.authenticated = me.roles.includes("admin"));
   }
 
   getShips(): void {
