@@ -32,6 +32,7 @@ export class OrderDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOrder();
+    this.getMe();
   }
 
   getOrder(): void {
