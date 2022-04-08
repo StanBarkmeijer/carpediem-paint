@@ -3,8 +3,9 @@ import { Ship } from "../ship/ship";
 
 export interface Order {
     _id: string,
-    user: string,
+    user: any,
     date: Date,
     ship: Ship,
-    paints: Array<Paint>
+    paints: Array<Paint>,
+    price?: number
 }

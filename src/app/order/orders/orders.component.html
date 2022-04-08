@@ -1,1 +1,59 @@
-<p>orders works!</p>
+<div>
+    <mat-card class="card">
+        <mat-card-content>
+            <div class="container">
+                <div class="header">
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                    </mat-form-field>
+                </div>
+                <mat-table #table [dataSource]="dataSource">
+                    <ng-container matColumnDef="user">
+                        <mat-header-cell *matHeaderCellDef>User</mat-header-cell>
+                        <mat-cell *matCellDef="let order">
+                            <p>{{ order.user.firstName + " " + order.user.lastName }}</p>
+                        </mat-cell>
+                    </ng-container>  
+                    
+                    <ng-container matColumnDef="ship">
+                        <mat-header-cell *matHeaderCellDef>Ship</mat-header-cell>
+                        <mat-cell *matCellDef="let order">
+                            <p>{{ order.ship.name }}</p>
+                        </mat-cell>
+                    </ng-container>  
+
+                    <ng-container matColumnDef="price">
+                        <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+                        <mat-cell *matCellDef="let order">
+                            <p>{{ order.price | currency:'EUR' }}</p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="date">
+                        <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+                        <mat-cell *matCellDef="let order">
+                            <p>{{ order.date | date: 'dd.MM.yyyy' }}</p>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef>Approve?</mat-header-cell>
+                        <mat-cell *matCellDef="let order">
+                            <button mat-icon-button>
+                                <mat-icon style="color: green">done</mat-icon>
+                            </button>
+                            <button mat-icon-button>
+                                <mat-icon style="color: red">close</mat-icon>
+                            </button>
+                            <button mat-icon-button routerLink="/order/{{order._id}}">
+                                <mat-icon>visibility</mat-icon>
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

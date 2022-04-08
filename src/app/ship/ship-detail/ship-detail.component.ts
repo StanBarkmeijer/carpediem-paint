@@ -58,8 +58,6 @@ export class ShipDetailComponent implements OnInit {
             .forEach((part: any) => paints["Overigen"].push({part: part.part, paint: part.paint }));
 
           this.paints = paints;
-
-          console.log(this.paints);
         });
     });
   }

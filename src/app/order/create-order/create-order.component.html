@@ -1,11 +1,39 @@
-<div class="card">
-    <mat-card *ngIf="ship" class="card">
-        <mat-card-header>
-            <mat-card-title>Ordering for: {{ ship.name }}</mat-card-title>
-        </mat-card-header>
+<div class="inner-wrapper">
+    <div class="card">
+        <mat-card *ngIf="ship" class="card">
+            <mat-card-header>
+                <mat-card-title>Ordering for: {{ ship.name | uppercase }}</mat-card-title>
+            </mat-card-header>
+    
+            <mat-card-content>
+                <div *ngFor="let onderdeel of paints | keyvalue">
+                    <div *ngIf="onderdeel.value.length != 0">
+                        <h1>{{ onderdeel.key }}</h1>
+    
+                        <div *ngFor="let x of onderdeel.value">
+                            <p><b>{{ x.part }}</b></p>
+                            <mat-form-field class="input" style="width: 50%">
+                                <p>
+                                    <mat-icon mat-list-icon [ngStyle]="{'color': x.paint.color }">format_paint</mat-icon>
+                                {{ x.paint.name }} (price: {{ x.count * x.paint.price | currency:'EUR' }})
+                                </p>
 
-        <mat-card-content>
-            wallah
-        </mat-card-content>
-    </mat-card>
+                                <input 
+                                    matInput 
+                                    type="number"
+                                    placeholder="Amount"
+                                    [(ngModel)]="x.count">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+
+            
+            <mat-card-actions>
+                <button (click)="goBack()" mat-button>BACK</button>
+                <button (click)="order()" mat-button>ORDER</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>

@@ -15,7 +15,7 @@ const OrderSchema = new mongoose.Schema({
     paints: [
         { 
             paint: Paint.schema,
-            quantity: Number
+            count: Number
         }
     ]
 });

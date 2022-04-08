@@ -31,7 +31,7 @@ export class PaintsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(() => this.getPaints());
+    this.getPaints();
   }
 
   getPaints(): void {

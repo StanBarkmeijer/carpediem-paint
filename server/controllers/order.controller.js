@@ -22,34 +22,13 @@ module.exports = {
 async function create(req, res) {
     order = await orderSchema.validateAsync(req.body, { abortEarly: false });
 
-    let paints = [];
-
-    order.paints.forEach((paintID) => {
-        Paint.model
-            .find({ _id: paintID })
-            .then((data) => paints.push(data[0]));
-    });
-
-    order.paints = paints;
-
     Order
         .model(order)
         .save()
         .then((data) => {
-            User
-                .model
-                .findByIdAndUpdate(
-                    req.body.user, 
-                    { $push: { orders: data._id }},
-                    { new: true, useFindAndModify: false });
-
-            Order
-                .model
-                .findByIdAndUpdate(
-                    data._id,
-                    { $push: { paints: paints }},
-                    { new: true, useFindAndModify: false })
-                .then((data) => res.send(data)); 
+            res
+                .status(200)
+                .send(data);
         })
         .catch((err) => {
             res

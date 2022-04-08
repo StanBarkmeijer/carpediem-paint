@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
 const Paint = require("../models/paint.model");
+const Ship = require("../models/ship.model");
 
 const paintSchema = Joi.object({
     name: Joi.string().required(),
@@ -82,6 +83,39 @@ async function update(req, res) {
                     message: err.message || `Can't update Paint with ID=${id}.`
                 });
         });
+
+    Ship.model
+        .find()
+        .then((data) => {
+            data.forEach(ship => {
+                let v = findAndUpdateInShip(ship.voorschip, req.body);
+                let m = findAndUpdateInShip(ship.middenschip, req.body);
+                let a = findAndUpdateInShip(ship.achterschip, req.body);
+                let o = findAndUpdateInShip(ship.overigen, req.body);
+
+                console.log(v[0].paint);
+
+                const newShip = {
+                    voorschip: v,
+                    middenschip: m,
+                    achterschip: a,
+                    overigen: o
+                }
+
+                Ship.model
+                    .findByIdAndUpdate(ship._id, newShip, { useFindAndModify: true });
+            });
+        });
+}
+
+function findAndUpdateInShip(input, paint) {
+    input.forEach((i) => {
+        if (i.paint.name === paint.name) {
+            i.paint.color = paint.color;
+        }
+    });
+
+    return input;
 }
 
 async function remove(req, res) {
