@@ -12,11 +12,11 @@ import { UserService } from '../user.service';
 export class CreateUserComponent implements OnInit {
 
   userForm = this.fb.group({
-    firstName: ["", Validators.required],
-    lastName: ["", Validators.required],
-    email: ["", Validators.required],
-    password: ["", Validators.required],
-    repeatPassword: ["", Validators.required]
+    firstName: ["", [Validators.required, Validators.minLength(3)]],
+    lastName: ["", [Validators.required, Validators.minLength(3)]],
+    email: ["", [Validators.required, Validators.email]],
+    password: ["", [Validators.required, Validators.minLength(6)]],
+    repeatPassword: ["", [Validators.required, Validators.minLength(6)]]
   })
 
   constructor(
@@ -30,6 +30,8 @@ export class CreateUserComponent implements OnInit {
   }
 
   sendForm(): void {
+    if (this.userForm.invalid) return;
+
     this.userService
       .createUser(this.userForm.value)
       .subscribe((user) => {

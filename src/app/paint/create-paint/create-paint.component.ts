@@ -12,10 +12,10 @@ import { PaintService } from '../paint.service';
 export class CreatePaintComponent implements OnInit {
 
   paintForm = this.fb.group({
-    name: ["", Validators.required],
-    price: ["", Validators.required],
-    url: ["", Validators.required],
-    color: ["", Validators.required]
+    name: ["", [Validators.required, Validators.minLength(3)]],
+    price: ["", [Validators.required, Validators.min(0)]],
+    url: ["", [Validators.required, Validators.minLength(3)]],
+    color: ["", [Validators.required, Validators.minLength(3)]],
   });
 
   constructor(
@@ -29,6 +29,8 @@ export class CreatePaintComponent implements OnInit {
   }
 
   sendForm(): void {
+    if (this.paintForm.invalid) return;
+
     this.paintService
       .createPaint(this.paintForm.value)
       .subscribe(() => {

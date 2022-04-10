@@ -8,22 +8,41 @@
         <p>
             Edit information from {{ paint.name | uppercase }} below
         </p>    
-        <mat-form-field class="input">
-            <mat-label>Paint name</mat-label>
-            <input matInput [(ngModel)]="paint.name" placeholder="name">
-        </mat-form-field>
-        <mat-form-field class="input">
-            <mat-label>Paint price</mat-label>
-            <input type="number" matInput [(ngModel)]="paint.price" placeholder="price">
-        </mat-form-field>
-        <mat-form-field class="input">
-            <mat-label>Paint URL</mat-label>
-            <input matInput [(ngModel)]="paint.url" placeholder="url">
-        </mat-form-field>
-        <mat-form-field class="input">
-            <mat-label>Color</mat-label>
-            <input type="color" matInput [(ngModel)]="paint.color" placeholder="color">
-        </mat-form-field>
+        
+        <form [formGroup]="paintForm">
+            <mat-form-field class="input">
+                <mat-label>Paint name</mat-label>
+                <input matInput [(ngModel)]="paint.name" formControlName="name" placeholder="name">
+            </mat-form-field>
+            <mat-form-field class="input">
+                <mat-label>Paint price</mat-label>
+                <input type="number" matInput [(ngModel)]="paint.price" formControlName="price" placeholder="price">
+            </mat-form-field>
+            <mat-form-field class="input">
+                <mat-label>Paint URL</mat-label>
+                <input matInput [(ngModel)]="paint.url" formControlName="url" placeholder="url">
+            </mat-form-field>
+            <mat-form-field class="input">
+                <mat-label>Color</mat-label>
+                <input type="color" matInput [(ngModel)]="paint.color" formControlName="color" placeholder="color">
+            </mat-form-field>
+        </form>
+
+        <div style="margin-top: 20px" *ngIf="paintForm.invalid && paintForm.touched" class="alert alert-danger">
+            <div *ngIf="paintForm.controls['name'].invalid">
+                <mat-error *ngIf="paintForm.controls['name'].errors?.['required']">Name is required</mat-error>
+                <mat-error *ngIf="paintForm.controls['name'].errors?.['minLength']">Name must be at least 3 characters long</mat-error>
+            </div>
+            <div *ngIf="paintForm.controls['price'].invalid">
+                <mat-error *ngIf="paintForm.controls['price'].errors?.['required']">Price is required</mat-error>
+            </div>
+            <div *ngIf="paintForm.controls['url'].invalid">
+                <mat-error *ngIf="paintForm.controls['url'].errors?.['required']">URL is required</mat-error>
+            </div>
+            <div *ngIf="paintForm.controls['color'].invalid">
+                <mat-error *ngIf="paintForm.controls['color'].errors?.['required']">Color is required</mat-error>
+            </div>
+        </div>
     </mat-card-content>
 
     <mat-card-actions>

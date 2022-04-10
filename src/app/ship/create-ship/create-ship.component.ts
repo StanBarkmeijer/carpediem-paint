@@ -30,8 +30,8 @@ export class CreateShipComponent implements OnInit {
   checked = [];
 
   shipForm = this.fb.group({
-    name: ["", Validators.required],
-    mmsi: ["", Validators.required],
+    name: ["", Validators.required, Validators.minLength(3)],
+    mmsi: ["", Validators.required, Validators.minLength(5)],
   })
 
   constructor(
@@ -149,6 +149,8 @@ export class CreateShipComponent implements OnInit {
   }
 
   sendForm(): void {
+    if (this.shipForm.invalid) return;
+
     const { name, mmsi } = this.shipForm.value;
 
     const voorschip = this.getChecked(this.parts2[0].paints)

@@ -45,6 +45,28 @@
                         <button mat-flat-button style="background-color: #50C0DD; color: white;">Submit</button>
                     </div>
                 </div>
+
+                <div style="margin-top: 20px" *ngIf="userForm.invalid && userForm.touched" class="alert alert-danger">
+                    <div *ngIf="userForm.controls['firstName'].invalid">
+                        <mat-error *ngIf="userForm.controls['firstName'].errors?.['required']">First name is required</mat-error>
+                        <mat-error *ngIf="userForm.controls['firstName'].errors?.['minLength']">First name must be at least 3 characters long</mat-error>
+                    </div>
+                    <div *ngIf="userForm.controls['lastName'].invalid">
+                        <mat-error *ngIf="userForm.controls['lastName'].errors?.['required']">Last name is required</mat-error>
+                    </div>
+                    <div *ngIf="userForm.controls['email'].invalid">
+                        <mat-error *ngIf="userForm.controls['email'].errors?.['required']">E-Mail is required</mat-error>
+                        <mat-error *ngIf="userForm.controls['email'].errors?.['email']">E-Mail is invalid</mat-error>
+                    </div>
+                    <div *ngIf="userForm.controls['password'].invalid">
+                        <mat-error *ngIf="userForm.controls['password'].errors?.['required']">Password is required</mat-error>
+                        <mat-error *ngIf="userForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters long</mat-error>
+                    </div>
+                    <div *ngIf="userForm.controls['repeatPassword'].invalid">
+                        <mat-error *ngIf="userForm.controls['repeatPassword'].errors?.['required']">Repeat Password is required</mat-error>
+                        <mat-error *ngIf="userForm.controls['repeatPassword'].errors?.['minlength']">Repeat Password must be at least 6 characters long</mat-error>
+                     </div>
+                </div>
             </div>
         </mat-card>
     </form>

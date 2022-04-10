@@ -1,4 +1,5 @@
-<mat-grid-list cols="1" rowHeight="500px">
+<div>
+  <mat-grid-list cols="1" rowHeight="750px">
     <form [formGroup]="registerForm" (ngSubmit)="register">
     <mat-grid-tile>
         <div class="example-container">
@@ -82,7 +83,38 @@
           <span>
             Already have an account ? 
             <a [routerLink]="['/auth/login']">login</a> here</span>
+
+            <div style="margin-top: 20px" *ngIf="registerForm.invalid && registerForm.touched" class="alert alert-danger">
+              <div *ngIf="registerForm.controls['firstName'].invalid">
+                <mat-error *ngIf="registerForm.controls['firstName'].errors?.['required']">First name is required</mat-error>
+                <mat-error *ngIf="registerForm.controls['firstName'].errors?.['minLength']">First name must be at least 3 characters long</mat-error>
+              </div>
+              <div *ngIf="registerForm.controls['lastName'].invalid">
+                <mat-error *ngIf="registerForm.controls['lastName'].errors?.['required']">Last name is required</mat-error>
+                <mat-error *ngIf="registerForm.controls['lastName'].errors?.['minLength']">Last name must be at least 3 characters long</mat-error>
+              </div>
+              <div *ngIf="registerForm.controls['email'].invalid">
+                <mat-error *ngIf="registerForm.controls['email'].errors?.['required']">Email is required</mat-error>
+                <mat-error *ngIf="registerForm.controls['email'].errors?.['email']">Email is invalid</mat-error>
+              </div>
+              <div *ngIf="registerForm.controls['password'].invalid">
+                <mat-error *ngIf="registerForm.controls['password'].errors?.['required']">Password is required</mat-error>
+                <mat-error *ngIf="registerForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters long</mat-error>
+              </div>
+              <div *ngIf="registerForm.controls['retypePassword'].invalid">
+                <mat-error *ngIf="registerForm.controls['retypePassword'].errors?.['required']">Retype password is required</mat-error>
+                <mat-error *ngIf="registerForm.controls['retypePassword'].errors?.['minlength']">Retype password must be at least 6 characters long</mat-error>
+              </div>
+              <div *ngIf="registerForm.controls['retypePassword'].invalid">
+                <mat-error *ngIf="registerForm.controls['retypePassword'].errors?.['required']">Retype password is required</mat-error>
+                <mat-error *ngIf="registerForm.controls['retypePassword'].errors?.['minlength']">Retype password must be at least 6 characters long</mat-error>
+              </div>
+              <div *ngIf="registerForm.controls['birthday'].invalid">
+                <mat-error *ngIf="registerForm.controls['birthday'].errors?.['required']">Birthday is required</mat-error>
+              </div>
+            </div>
         </div>
     </mat-grid-tile>
     </form>
 </mat-grid-list>
+</div>

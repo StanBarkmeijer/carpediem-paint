@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../user';
@@ -14,12 +15,20 @@ export class EditUserComponent implements OnInit {
 
   @Input() user!: User;
 
+  userForm = this.fb.group({
+    firstName: ["", [Validators.required, Validators.minLength(3)]],
+    lastName: ["", [Validators.required, Validators.minLength(3)]],
+    email: ["", [Validators.required, Validators.email]],
+    password: ["", [Validators.required, Validators.minLength(6)]]
+  })
+
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
     private location: Location,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +45,8 @@ export class EditUserComponent implements OnInit {
   }
 
   saveUser(id: string): void {
+    if (this.userForm.invalid) return;
+
     this.userService.editUser(id, this.user)
       .subscribe((user: User) => this.user = user);
 

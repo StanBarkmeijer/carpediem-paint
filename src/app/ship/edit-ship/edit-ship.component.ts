@@ -19,6 +19,11 @@ export class EditShipComponent implements OnInit {
   paints!: Paint[];
   activePaints!: Paint[];
 
+  shipForm = this.fb.group({
+    name: ["", [Validators.required, Validators.minLength(3)]],
+    mmsi: ["", [Validators.required, Validators.minLength(5)]],
+  })
+
   voorschip!: { part: String, paint: Paint; selected: boolean; }[][];
   middenschip!: { part: String, paint: Paint; selected: boolean; }[][];
   achterschip!: { part: String, paint: Paint; selected: boolean; }[][];
@@ -167,6 +172,8 @@ export class EditShipComponent implements OnInit {
   }
 
   editShip(): void {
+    if (this.shipForm.invalid) return;
+
     const { name, mmsi } = this.ship;
 
     const voorschip = this.getChecked(this.parts2[0].paints)

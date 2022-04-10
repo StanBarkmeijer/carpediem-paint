@@ -36,6 +36,22 @@
                     <button mat-flat-button style="background-color: #50C0DD; color: white;">Submit</button>
                 </div>
             </div>
+
+            <div style="margin-top: 20px" *ngIf="paintForm.invalid && paintForm.touched" class="alert alert-danger">
+                <div *ngIf="paintForm.controls['name'].invalid">
+                    <mat-error *ngIf="paintForm.controls['name'].errors?.['required']">Name is required</mat-error>
+                    <mat-error *ngIf="paintForm.controls['name'].errors?.['minLength']">Name must be at least 3 characters long</mat-error>
+                </div>
+                <div *ngIf="paintForm.controls['price'].invalid">
+                    <mat-error *ngIf="paintForm.controls['price'].errors?.['required']">Price is required</mat-error>
+                </div>
+                <div *ngIf="paintForm.controls['url'].invalid">
+                    <mat-error *ngIf="paintForm.controls['url'].errors?.['required']">URL is required</mat-error>
+                </div>
+                <div *ngIf="paintForm.controls['color'].invalid">
+                    <mat-error *ngIf="paintForm.controls['color'].errors?.['required']">Color is required</mat-error>
+                </div>
+            </div>
         </mat-card>
     </form>
 </div>

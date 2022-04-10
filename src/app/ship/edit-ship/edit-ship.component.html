@@ -1,58 +1,70 @@
 <div class="inner-wrapper">
     <h1>Edit ship</h1>
 
-    <div class="controllers-wrapper">
-      <!-- Name -->
-      <mat-form-field class="input" *ngIf="ship">
-        <input matInput placeholder="Name" [(ngModel)]="ship.name" required>
-      </mat-form-field>
-
-      <br />
-
-      <mat-form-field class="input" *ngIf="ship">
-        <input matInput placeholder="MMSI" [(ngModel)]="ship.mmsi" required>
-      </mat-form-field>
-
-      <!-- Voorschip -->
-      <!-- <mat-card *ngFor="let part of parts" style="margin-top: 5px">
-          <mat-card-title>{{ part }}</mat-card-title>
-          <mat-card-content>
-            <div *ngFor="let paint of paints">
-                <mat-checkbox 
-                    #box 
-                    [name]="part + '-' + paint.name"
-                    [value]="paint._id" 
-                    (change)="changeBox($event)">
-                    <mat-icon mat-list-icon [ngStyle]="{'color': paint.color }">format_paint</mat-icon>
-                    {{ paint.name }}</mat-checkbox>
-              </div>
-          </mat-card-content>
-      </mat-card> -->
-
-      <mat-card *ngFor="let onderdeel of parts2" style="margin-top: 5px">
-        <mat-card-title>{{ onderdeel.name }}</mat-card-title>
-        <div *ngFor="let sub of onderdeel.paints">
+    <form [formGroup]="shipForm">
+      <div class="controllers-wrapper">
+        <!-- Name -->
+        <mat-form-field class="input" *ngIf="ship">
+          <input matInput placeholder="Name" [(ngModel)]="ship.name" formControlName="name" required>
+        </mat-form-field>
+  
+        <br />
+  
+        <mat-form-field class="input" *ngIf="ship">
+          <input matInput placeholder="MMSI" [(ngModel)]="ship.mmsi" formControlName="mmsi" required>
+        </mat-form-field>
+  
+        <!-- Voorschip -->
+        <!-- <mat-card *ngFor="let part of parts" style="margin-top: 5px">
+            <mat-card-title>{{ part }}</mat-card-title>
             <mat-card-content>
-                <p><b>{{ sub[0].part }}</b></p>
-                <!-- <p *ngFor="let subsub of sub">
-                    <mat-icon mat-list-icon [ngStyle]="{'color': subsub.paint.color }">format_paint</mat-icon>
-                    {{ subsub.paint.name }}</p> -->
-                <div *ngFor="let subpaint of sub">
-                    <mat-checkbox
-                    #box
-                    [name]="onderdeel.name + '-' + sub[0].part + '-' + subpaint.paint.name"
-                    [value]="subpaint.paint._id"
-                    [checked]="subpaint.selected"
-                    (change)="changeBox($event)">
-                        <mat-icon mat-list-icon [ngStyle]="{'color': subpaint.paint.color }">format_paint</mat-icon>
-                        {{ subpaint.paint.name }}
-                    </mat-checkbox>
+              <div *ngFor="let paint of paints">
+                  <mat-checkbox 
+                      #box 
+                      [name]="part + '-' + paint.name"
+                      [value]="paint._id" 
+                      (change)="changeBox($event)">
+                      <mat-icon mat-list-icon [ngStyle]="{'color': paint.color }">format_paint</mat-icon>
+                      {{ paint.name }}</mat-checkbox>
                 </div>
             </mat-card-content>
-        </div>
-      </mat-card>
+        </mat-card> -->
+  
+        <mat-card *ngFor="let onderdeel of parts2" style="margin-top: 5px">
+          <mat-card-title>{{ onderdeel.name }}</mat-card-title>
+          <div *ngFor="let sub of onderdeel.paints">
+              <mat-card-content>
+                  <p><b>{{ sub[0].part }}</b></p>
+                  <!-- <p *ngFor="let subsub of sub">
+                      <mat-icon mat-list-icon [ngStyle]="{'color': subsub.paint.color }">format_paint</mat-icon>
+                      {{ subsub.paint.name }}</p> -->
+                  <div *ngFor="let subpaint of sub">
+                      <mat-checkbox
+                      #box
+                      [name]="onderdeel.name + '-' + sub[0].part + '-' + subpaint.paint.name"
+                      [value]="subpaint.paint._id"
+                      [checked]="subpaint.selected"
+                      (change)="changeBox($event)">
+                          <mat-icon mat-list-icon [ngStyle]="{'color': subpaint.paint.color }">format_paint</mat-icon>
+                          {{ subpaint.paint.name }}
+                      </mat-checkbox>
+                  </div>
 
-    </div>
+                  <div style="margin-top: 20px" *ngIf="shipForm.invalid && shipForm.touched" class="alert alert-danger">
+                    <div *ngIf="shipForm.controls['name'].invalid">
+                      <mat-error *ngIf="shipForm.controls['name'].errors?.['required']">Name is required</mat-error>
+                      <mat-error *ngIf="shipForm.controls['name'].errors?.['minLength']">Name must be at least 3 characters long</mat-error>
+                    </div>
+                    <div *ngIf="shipForm.controls['mmsi'].invalid">
+                      <mat-error *ngIf="shipForm.controls['mmsi'].errors?.['required']">MMSI is required</mat-error>
+                    </div>
+                  </div>
+              </mat-card-content>
+          </div>
+        </mat-card>
+  
+      </div>
+    </form>
 
     <div class="full-wrapper button-wrapper" style="margin-top: 20px">
       <div class="button-wrapper">

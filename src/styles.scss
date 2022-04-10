@@ -1,0 +1,9 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$carpediem-primary: #007BA5;
+$carpediem-secondary: #50C0DD; 
+$carpediem-theme: mat-light-theme($carpediem-primary, $carpediem-secondary);
+
+@include angular-material-theme($carpediem-theme);
+

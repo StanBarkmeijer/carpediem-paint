@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Paint } from '../paint';
@@ -12,14 +13,22 @@ import { PaintService } from '../paint.service';
 })
 export class EditPaintComponent implements OnInit {
 
-  @Input() paint!: Paint;
+  @Input() paint?: Paint;
+
+  paintForm = this.fb.group({
+    name: ["", [Validators.required, Validators.minLength(3)]],
+    price: ["", [Validators.required, Validators.min(0)]],
+    url: ["", [Validators.required, Validators.minLength(3)]],
+    color: ["", [Validators.required, Validators.minLength(3)]],
+  });
 
   constructor(
     private paintService: PaintService,
     private route: ActivatedRoute,
     private location: Location,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -36,14 +45,16 @@ export class EditPaintComponent implements OnInit {
   }
 
   savePaint(id: string): void {
-    this.paintService.editPaint(id, this.paint)
-      .subscribe((paint: Paint) => this.paint = paint);
+    if (this.paint && this.paintForm.valid) {
+      this.paintService.editPaint(id, this.paint)
+        .subscribe((paint: Paint) => this.paint = paint);
 
-    this.toastr.success(`Paint with id: ${this.paint?._id} updated`, "Paint updated",  {
-      progressBar: true
-    });
+      this.toastr.success(`Paint with id: ${this.paint?._id} updated`, "Paint updated",  {
+        progressBar: true
+      });
 
-    this.router.navigate(["/paints"]);
+      this.router.navigate(["/paints"]);
+    }
   }
 
   goBack(): void {

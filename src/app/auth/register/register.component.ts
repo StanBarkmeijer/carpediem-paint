@@ -13,11 +13,11 @@ export class RegisterComponent implements OnInit {
   hide: boolean = true;
 
   registerForm = this.fb.group({
-    firstName: ["", Validators.required],
-    lastName: ["", Validators.required],
+    firstName: ["", [Validators.required, Validators.minLength(3)]],
+    lastName: ["", [Validators.required, Validators.minLength(3)]],
     email: ["", [Validators.required, Validators.email]],
-    password: ["", Validators.required],
-    retypePassword: ["", Validators.required],
+    password: ["", [Validators.required, Validators.minLength(6)]],
+    retypePassword: ["", [Validators.required, Validators.minLength(6)]],
     birthday: ["", Validators.required]
   });
 
