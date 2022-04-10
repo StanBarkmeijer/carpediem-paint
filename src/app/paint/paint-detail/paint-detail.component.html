@@ -12,7 +12,7 @@
     
         <mat-card-actions>
             <button (click)="goBack()" mat-button>BACK</button>
-            <button *ngIf="authenticated" routerLink="/edit-paint/{{paint._id}}" mat-button>EDIT PAINT</button>
+            <button *ngIf="authenticated" routerLink="edit" mat-button>EDIT PAINT</button>
             <button *ngIf="authenticated" (click)="deletePaint(paint._id)" mat-button>DELETE PAINT</button>
         </mat-card-actions>
     </mat-card>

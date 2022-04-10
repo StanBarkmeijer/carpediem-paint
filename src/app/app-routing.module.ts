@@ -29,36 +29,49 @@ const routes: Routes = [
   { path: "auth/login", pathMatch: "full", component: LoginComponent }, 
   { path: "auth/register", pathMatch: "full", component: RegisterComponent }, 
 
-  { path: "order", pathMatch: "full", component: SelectShipComponent, canActivate: [AuthGuard] },
-  { path: "orders", pathMatch: "full", component: OrdersComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "order/:id", pathMatch: "full", component: OrderDetailComponent, canActivate: [AuthGuard] },
-  { path: "place-order/:id", pathMatch: "full", component: CreateOrderComponent, canActivate: [AuthGuard] },
+  {
+    path: "order",
+    canActivate: [AuthGuard],
+    children: [
+      { path: "", pathMatch: "full", component: OrdersComponent, canActivate: [OnlyAdminUsersGuard] },
+      { path: "create", pathMatch: "full", component: SelectShipComponent },
+      { path: "create/:id", pathMatch: "full", component: CreateOrderComponent },
+      { path: ":id", pathMatch: "full", component: OrderDetailComponent },
+    ]
+  },
 
-  // {
-  //   path: "user",
-  //   component: UserComponent,
-  //   canActivate: [AuthGuard],
-  //   children: [
-  //     { path: "create", pathMatch: "full", component: CreateUserComponent },
-  //     { path: ":id", pathMatch: "full", component: UserDetailComponent },
-  //     { path: ":id/edit", pathMatch: "full", component: EditUserComponent },
-  //   ]
-  // },
+  {
+    path: "user",
+    canActivate: [AuthGuard],
+    children: [
+      { path: "", pathMatch: "full", component: UserComponent },
+      { path: "create", pathMatch: "full", component: CreateUserComponent, canActivate: [OnlyAdminUsersGuard] },
+      { path: ":id", pathMatch: "full", component: UserDetailComponent },
+      { path: ":id/edit", pathMatch: "full", component: EditUserComponent, canActivate: [OnlyAdminUsersGuard] },
+    ]
+  },
 
-  { path: "users", component: UserComponent, canActivate: [AuthGuard] },
-  { path: "edit-user/:id", component: EditUserComponent, canActivate: [OnlyAdminUsersGuard]},
-  { path: "create-user", component: CreateUserComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "user/:id", component: UserDetailComponent, canActivate: [AuthGuard] },
+  {
+    path: "paint",
+    canActivate: [AuthGuard],
+    children: [
+      { path: "", pathMatch: "full", component: PaintsComponent },
+      { path: "create", pathMatch: "full", component: CreatePaintComponent, canActivate: [OnlyAdminUsersGuard] },
+      { path: ":id", pathMatch: "full", component: PaintDetailComponent },
+      { path: ":id/edit", pathMatch: "full", component: EditPaintComponent, canActivate: [OnlyAdminUsersGuard] },
+    ]  
+  },
 
-  { path: "paints", component: PaintsComponent, canActivate: [AuthGuard] },
-  { path: "edit-paint/:id", component: EditPaintComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "create-paint", component: CreatePaintComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "paint/:id", component: PaintDetailComponent, canActivate: [AuthGuard] },
-
-  { path: "ships", component: ShipsComponent, canActivate: [AuthGuard] },
-  { path: "edit-ship/:id", component: EditShipComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "create-ship", component: CreateShipComponent, canActivate: [OnlyAdminUsersGuard] },
-  { path: "ship/:id", component: ShipDetailComponent, canActivate: [AuthGuard] }
+  {
+    path: "ship",
+    canActivate: [AuthGuard],
+    children: [
+      { path: "", pathMatch: "full", component: ShipsComponent },
+      { path: "create", pathMatch: "full", component: CreateShipComponent, canActivate: [OnlyAdminUsersGuard] },
+      { path: ":id", pathMatch: "full", component: ShipDetailComponent },
+      { path: ":id/edit", pathMatch: "full", component: EditShipComponent, canActivate: [OnlyAdminUsersGuard] },
+    ]
+  },
 ];
 
 @NgModule({

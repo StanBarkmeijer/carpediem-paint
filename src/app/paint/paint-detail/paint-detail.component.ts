@@ -28,6 +28,7 @@ export class PaintDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPaint();
+    this.getMe();
   }
   
   getMe(): void {

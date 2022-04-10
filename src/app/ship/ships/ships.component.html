@@ -14,20 +14,20 @@
                     <mat-form-field>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
                     </mat-form-field>
-                    <button routerLink="/create-ship/" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add ship</button>
+                    <button routerLink="create" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add ship</button>
                 </div>
                 <mat-table #table [dataSource]="dataSource">
                     <ng-container matColumnDef="name">
                         <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
                         <mat-cell *matCellDef="let ship">
                             <mat-icon mat-list-icon [ngStyle]="{'color': '#007ba5' }">sailing</mat-icon>
-                            <a style="margin-left: 5px" routerLink="/ship/{{ship._id}}">{{ ship.name }}</a>
+                            <a style="margin-left: 5px" routerLink="{{ship._id}}">{{ ship.name }}</a>
                         </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                         <mat-cell *matCellDef="let ship">
-                            <button *ngIf="authenticated" mat-icon-button routerLink="/edit-ship/{{ship._id}}">
+                            <button *ngIf="authenticated" mat-icon-button routerLink="{{ship._id}}/edit">
                                 <mat-icon>edit</mat-icon>
                             </button>
                             <button *ngIf="authenticated" mat-icon-button (click)="deleteShip(ship._id)">

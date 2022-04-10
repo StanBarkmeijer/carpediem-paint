@@ -42,7 +42,7 @@
     
         <mat-card-actions>
             <button (click)="goBack()" mat-button>BACK</button>
-            <button *ngIf="authenticated" routerLink="/edit-ship/{{ship._id}}" mat-button>EDIT SHIP</button>
+            <button *ngIf="authenticated" routerLink="edit" mat-button>EDIT SHIP</button>
             <button *ngIf="authenticated" (click)="deleteShip(id)" mat-button>DELETE SHIP</button>
         </mat-card-actions>
     </mat-card>

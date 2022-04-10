@@ -14,14 +14,14 @@
                     <mat-form-field>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
                     </mat-form-field>
-                    <button routerLink="/create-paint/" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add paint</button>
+                    <button routerLink="create" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add paint</button>
                 </div>
                 <mat-table #table [dataSource]="dataSource">
                     <ng-container matColumnDef="name">
                         <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
                         <mat-cell *matCellDef="let paint">
                             <mat-icon mat-list-icon [ngStyle]="{'color': paint.color }">format_paint</mat-icon>
-                            <a style="margin-left: 5px" routerLink="/paint/{{paint._id}}">{{ paint.name }}</a>
+                            <a style="margin-left: 5px" routerLink="{{paint._id}}">{{ paint.name }}</a>
                         </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="price">
@@ -31,7 +31,7 @@
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                         <mat-cell *matCellDef="let paint">
-                            <button *ngIf="authenticated" mat-icon-button routerLink="/edit-paint/{{paint._id}}">
+                            <button *ngIf="authenticated" mat-icon-button routerLink="{{paint._id}}/edit">
                                 <mat-icon>edit</mat-icon>
                             </button>
                             <button *ngIf="authenticated" mat-icon-button (click)="deletePaint(paint._id)">

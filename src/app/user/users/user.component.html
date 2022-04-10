@@ -6,7 +6,7 @@
                     <mat-form-field>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
                     </mat-form-field>
-                    <button routerLink="/create-user/" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add user</button>
+                    <button routerLink="create" style="margin-left: 5px;background-color: #50C0DD; color: white;" mat-raised-button>Add user</button>
                 </div>
                 <mat-table #table [dataSource]="dataSource" matSort>
                     <ng-container matColumnDef="firstName">
@@ -14,7 +14,7 @@
                         <mat-cell *matCellDef="let user" >
                             <mat-icon mat-list-icon *ngIf="user.roles.includes('admin')">engineering</mat-icon>
                             <mat-icon mat-list-icon *ngIf="!user.roles.includes('admin')">person</mat-icon>
-                            <a style="margin-left: 5px" routerLink="/user/{{user._id}}">{{ user.firstName }}</a>
+                            <a style="margin-left: 5px" routerLink="{{user._id}}">{{ user.firstName }}</a>
                         </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="lastName">
@@ -29,7 +29,7 @@
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                         <mat-cell *matCellDef="let user">
-                            <button mat-icon-button *ngIf="me.roles.includes('admin') || me._id === user._id" routerLink="/edit-user/{{user._id}}">
+                            <button mat-icon-button *ngIf="me.roles.includes('admin') || me._id === user._id" routerLink="{{user._id}}/edit">
                                 <mat-icon>edit</mat-icon>
                             </button>
                             <button mat-icon-button *ngIf="me.roles.includes('admin')" (click)="deleteUser(user._id)">

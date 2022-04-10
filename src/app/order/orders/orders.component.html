@@ -45,7 +45,7 @@
                             <button mat-icon-button>
                                 <mat-icon *ngIf="!order.approved" style="color: red" (click)="setTrue(order)">close</mat-icon>
                             </button>
-                            <button mat-icon-button routerLink="/order/{{order._id}}">
+                            <button mat-icon-button routerLink="{{order._id}}">
                                 <mat-icon>visibility</mat-icon>
                             </button>
                         </mat-cell>
