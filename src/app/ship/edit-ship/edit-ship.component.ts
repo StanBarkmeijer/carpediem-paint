@@ -211,13 +211,13 @@ export class EditShipComponent implements OnInit {
     return checked;
   }
 
-  getSelected(input: any) {
-    if (input.length > 0) {
-      this.parts2[0].paints.forEach((paint: any) => {
+  getSelected(input: any[][]) {
+    for (let i = 0 ; i < 4 ; i++) {
+      this.parts2[i].paints.forEach((paint: any) => {
         input.forEach((shipPaint: any) => {
           paint.forEach((paint2: any) => {
             const name = paint2.paint.name;
-
+  
             if ((name === shipPaint.paint.name) && (shipPaint.part === paint2.part)) {
               paint2.selected = true;
             }
