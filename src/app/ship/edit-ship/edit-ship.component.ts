@@ -157,7 +157,7 @@ export class EditShipComponent implements OnInit {
 
     let found;
 
-    for (let array of clickedShipPart.paints) {      
+    for (let array of clickedShipPart.paints) {    
       const f = array.find((x: any) => x.part == part && x.paint.name == verf);
 
       if (f) {

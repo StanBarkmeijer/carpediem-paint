@@ -32,6 +32,16 @@
                 </div>
             </mat-card-content>
         </div>
+
+        <div style="margin-top: 20px" *ngIf="shipForm.invalid && shipForm.touched" class="alert alert-danger">
+          <div *ngIf="shipForm.controls['name'].invalid">
+            <mat-error *ngIf="shipForm.controls['name'].errors?.['required']">Name is required</mat-error>
+            <mat-error *ngIf="shipForm.controls['name'].errors?.['minLength']">Name must be at least 3 characters long</mat-error>
+          </div>
+          <div *ngIf="shipForm.controls['mmsi'].invalid">
+            <mat-error *ngIf="shipForm.controls['mmsi'].errors?.['required']">MMSI is required</mat-error>
+          </div>
+        </div>
       </mat-card>
 
     </div>
@@ -39,16 +49,6 @@
     <div class="full-wrapper button-wrapper" style="margin-top: 20px">
       <div class="button-wrapper">
         <button mat-flat-button style="background-color: #50C0DD; color: white;">Submit</button>
-      </div>
-    </div>
-
-    <div style="margin-top: 20px" *ngIf="shipForm.invalid && shipForm.touched" class="alert alert-danger">
-      <div *ngIf="shipForm.controls['name'].invalid">
-        <mat-error *ngIf="shipForm.controls['name'].errors?.['required']">Name is required</mat-error>
-        <mat-error *ngIf="shipForm.controls['name'].errors?.['minLength']">Name must be at least 3 characters long</mat-error>
-      </div>
-      <div *ngIf="shipForm.controls['mmsi'].invalid">
-        <mat-error *ngIf="shipForm.controls['mmsi'].errors?.['required']">MMSI is required</mat-error>
       </div>
     </div>
   </form>
