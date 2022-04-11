@@ -21,7 +21,7 @@ export class EditShipComponent implements OnInit {
 
   shipForm = this.fb.group({
     name: ["", [Validators.required, Validators.minLength(3)]],
-    mmsi: ["", [Validators.required, Validators.minLength(5)]],
+    mmsi: ["", [Validators.required, Validators.minLength(3)]],
   })
 
   voorschip!: { part: String, paint: Paint; selected: boolean; }[][];

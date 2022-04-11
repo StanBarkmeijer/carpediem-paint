@@ -49,17 +49,17 @@
                           {{ subpaint.paint.name }}
                       </mat-checkbox>
                   </div>
-
-                  <div style="margin-top: 20px" *ngIf="shipForm.invalid && shipForm.touched" class="alert alert-danger">
-                    <div *ngIf="shipForm.controls['name'].invalid">
-                      <mat-error *ngIf="shipForm.controls['name'].errors?.['required']">Name is required</mat-error>
-                      <mat-error *ngIf="shipForm.controls['name'].errors?.['minLength']">Name must be at least 3 characters long</mat-error>
-                    </div>
-                    <div *ngIf="shipForm.controls['mmsi'].invalid">
-                      <mat-error *ngIf="shipForm.controls['mmsi'].errors?.['required']">MMSI is required</mat-error>
-                    </div>
-                  </div>
               </mat-card-content>
+          </div>
+
+          <div style="margin-top: 20px" *ngIf="shipForm.invalid && shipForm.touched" class="alert alert-danger">
+            <div *ngIf="shipForm.controls['name'].invalid">
+              <mat-error *ngIf="shipForm.controls['name'].errors?.['required']">Name is required</mat-error>
+              <mat-error *ngIf="shipForm.controls['name'].errors?.['minLength']">Name must be at least 3 characters long</mat-error>
+            </div>
+            <div *ngIf="shipForm.controls['mmsi'].invalid">
+              <mat-error *ngIf="shipForm.controls['mmsi'].errors?.['required']">MMSI is required</mat-error>
+            </div>
           </div>
         </mat-card>
   
