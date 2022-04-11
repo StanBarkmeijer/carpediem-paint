@@ -192,7 +192,7 @@ export class EditShipComponent implements OnInit {
 
     this.shipService.editShip(this.ship._id, ship).subscribe(ship => {
       this.toastr.success("Schip is geupdated! " + name, "Succes!");
-      this.router.navigate(["/ships"]);
+      this.router.navigate(["/ship"]);
     });
   }
 

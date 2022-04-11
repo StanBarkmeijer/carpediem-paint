@@ -38,7 +38,7 @@ export class CreatePaintComponent implements OnInit {
           progressBar: true
         });
         
-        this.router.navigate(["/paints"]);
+        this.router.navigate(["/paint"]);
       });
   }
   

@@ -53,7 +53,7 @@ export class EditPaintComponent implements OnInit {
         progressBar: true
       });
 
-      this.router.navigate(["/paints"]);
+      this.router.navigate(["/paint"]);
     }
   }
 
@@ -68,7 +68,7 @@ export class EditPaintComponent implements OnInit {
       progressBar: true
     });
 
-    this.router.navigate(["/paints"]);
+    this.router.navigate(["/paint"]);
   }
 
 }

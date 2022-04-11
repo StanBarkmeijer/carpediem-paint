@@ -172,7 +172,7 @@ export class CreateShipComponent implements OnInit {
       .subscribe({ 
         next: (ship: any) => {
           this.toastr.success("Schip is aangemaakt! " + ship._id, "Succes!");
-          this.router.navigate(["/ships"]);
+          this.router.navigate(["/ship"]);
         }, 
         error: err => {
           this.toastr.error("Missing name or mssi", "Error!");
