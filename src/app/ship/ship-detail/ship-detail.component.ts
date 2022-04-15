@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Ship } from '../ship';
 import { ShipService } from '../ship.service';
@@ -12,12 +12,16 @@ import { ShipService } from '../ship.service';
   templateUrl: './ship-detail.component.html',
   styleUrls: ['./ship-detail.component.css']
 })
-export class ShipDetailComponent implements OnInit {
+export class ShipDetailComponent implements OnInit, OnDestroy {
 
   @Input() ship!: Ship;
   paints: any[] = [];
   id = "-1";
   authenticated: boolean = false;
+
+  authServiceSubscription!: Subscription;
+  routeSubscription!: Subscription;
+  getShipSubscription!: Subscription;
 
   constructor(
     private shipService: ShipService,
@@ -31,18 +35,24 @@ export class ShipDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getShip();
   }
+
+  ngOnDestroy(): void {
+    this.authServiceSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
+    this.getShipSubscription.unsubscribe();
+  }
   
   getMe(): void {
-    this.authService.getUser()
+    this.authServiceSubscription = this.authService.getUser()
       .subscribe((me: any) => this.authenticated = me.roles.includes("admin"));
   }
 
   getShip(): void {
-    this.route.params.subscribe((param: any) => {
+    this.routeSubscription = this.route.params.subscribe((param: any) => {
       const id = param["id"];
       this.id = id;
 
-      this.shipService.getShip(id)
+      this.getShipSubscription = this.shipService.getShip(id)
         .subscribe((ship: Ship) => {
           this.ship = ship;
 

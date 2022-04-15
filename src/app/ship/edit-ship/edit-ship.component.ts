@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Paint } from 'src/app/paint/paint';
 import { PaintService } from 'src/app/paint/paint.service';
 import { Ship } from '../ship';
@@ -13,11 +14,16 @@ import { ShipService } from '../ship.service';
   templateUrl: './edit-ship.component.html',
   styleUrls: ['./edit-ship.component.css']
 })
-export class EditShipComponent implements OnInit {
+export class EditShipComponent implements OnInit, OnDestroy {
 
   @Input() ship!: Ship;
   paints!: Paint[];
   activePaints!: Paint[];
+
+  routeSubscription!: Subscription;
+  getShipSubscription!: Subscription;
+  getPaintSubscription!: Subscription;
+  editShipSubscription!: Subscription;
 
   shipForm = this.fb.group({
     name: ["", [Validators.required, Validators.minLength(3)]],
@@ -47,11 +53,18 @@ export class EditShipComponent implements OnInit {
     this.getShip();
   }
 
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
+    this.getShipSubscription.unsubscribe();
+    this.getPaintSubscription.unsubscribe();
+    this.editShipSubscription.unsubscribe();
+  }
+
   getShip(): void {
-    this.route.params.subscribe((param: any) => {
+    this.routeSubscription = this.route.params.subscribe((param: any) => {
       const id = param["id"];
 
-      this.shipService.getShip(id)
+      this.getShipSubscription = this.shipService.getShip(id)
         .subscribe((ship: Ship) => {
           this.ship = ship
 
@@ -65,7 +78,7 @@ export class EditShipComponent implements OnInit {
   }
 
   getPaints(): void {
-    this.paintService
+    this.getPaintSubscription = this.paintService
       .getPaints()
       .subscribe(paints => {
         this.paints = paints.map(paint => {
@@ -190,10 +203,11 @@ export class EditShipComponent implements OnInit {
       overigen
     }
 
-    this.shipService.editShip(this.ship._id, ship).subscribe(ship => {
-      this.toastr.success("Schip is geupdated! " + name, "Succes!");
-      this.router.navigate(["/ship"]);
-    });
+    this.editShipSubscription = this.shipService
+      .editShip(this.ship._id, ship).subscribe(ship => {
+        this.toastr.success("Schip is geupdated! " + name, "Succes!");
+        this.router.navigate(["/ship"]);
+      });
   }
 
   getChecked(input: any) {

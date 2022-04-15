@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Paint } from 'src/app/paint/paint';
 import { PaintService } from 'src/app/paint/paint.service';
 import { ShipService } from '../ship.service';
@@ -11,14 +12,9 @@ import { ShipService } from '../ship.service';
   templateUrl: './create-ship.component.html',
   styleUrls: ['./create-ship.component.css']
 })
-export class CreateShipComponent implements OnInit {
+export class CreateShipComponent implements OnInit, OnDestroy {
 
   paints!: Paint[];
-
-  // voorschip: Paint[] = [];
-  // middenschip: Paint[] = [];
-  // achterschip: Paint[] = [];
-  // overigen: Paint[] = [];
 
   voorschip!: { part: String, paint: Paint; selected: boolean; }[][];
   middenschip!: { part: String, paint: Paint; selected: boolean; }[][];
@@ -28,6 +24,9 @@ export class CreateShipComponent implements OnInit {
   parts = ["Voorschip", "Middenschip", "Achterschip", "Overigen"];
   parts2: any;
   checked = [];
+
+  createShipSubscription!: Subscription;
+  getPaintSubscription!: Subscription;
 
   shipForm = this.fb.group({
     name: ["", [Validators.required, Validators.minLength(3)]],
@@ -46,8 +45,13 @@ export class CreateShipComponent implements OnInit {
     this.getPaints();
  }
 
+  ngOnDestroy(): void {
+    this.createShipSubscription.unsubscribe();
+    this.getPaintSubscription.unsubscribe();
+  }
+
   getPaints(): void {
-    this.paintService
+    this.getPaintSubscription = this.paintService
       .getPaints()
       .subscribe(paints => {
         this.paints = paints.map(paint => {
@@ -169,7 +173,7 @@ export class CreateShipComponent implements OnInit {
       overigen
     }
 
-    this.shipService
+    this.createShipSubscription = this.shipService
       .createShip(ship)
       .subscribe({ 
         next: (ship: any) => {
