@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { UserService } from '../user.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { UserService } from '../user.service';
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css']
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit, OnDestroy {
+
+  createUserSubscription!: Subscription;
 
   userForm = this.fb.group({
     firstName: ["", [Validators.required, Validators.minLength(3)]],
@@ -29,10 +32,14 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.createUserSubscription.unsubscribe();
+  }
+
   sendForm(): void {
     if (this.userForm.invalid) return;
 
-    this.userService
+    this.createUserSubscription = this.userService
       .createUser(this.userForm.value)
       .subscribe((user) => {
         this.toastr.success(`Created user with ID: ${user._id}`, "Added user", {

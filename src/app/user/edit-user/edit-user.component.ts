@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { User } from '../user';
 import { UserService } from '../user.service';
 
@@ -11,9 +12,15 @@ import { UserService } from '../user.service';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css']
 })
-export class EditUserComponent implements OnInit {
+export class EditUserComponent implements OnInit, OnDestroy {
 
   @Input() user!: User;
+
+  authServiceSubscription!: Subscription;
+  routeSubscription!: Subscription;
+  getUserSubscription!: Subscription;
+  editUserSubscription!: Subscription;
+  deleteUserSubscription!: Subscription;
 
   userForm = this.fb.group({
     firstName: ["", [Validators.required, Validators.minLength(3)]],
@@ -35,11 +42,19 @@ export class EditUserComponent implements OnInit {
     this.getUser();
   }
 
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
+    this.authServiceSubscription.unsubscribe();
+    this.getUserSubscription.unsubscribe();
+    this.editUserSubscription.unsubscribe();
+    this.deleteUserSubscription.unsubscribe();
+  }
+
   getUser(): void {
-    this.route.params.subscribe((param: any) => {
+    this.routeSubscription = this.route.params.subscribe((param: any) => {
       const id = param["id"];
 
-      this.userService.getUser(id)
+      this.getUserSubscription = this.userService.getUser(id)
         .subscribe((user: User) => this.user = user);
     }) 
   }
@@ -47,7 +62,7 @@ export class EditUserComponent implements OnInit {
   saveUser(id: string): void {
     if (this.userForm.invalid) return;
 
-    this.userService.editUser(id, this.user)
+    this.editUserSubscription = this.userService.editUser(id, this.user)
       .subscribe((user: User) => this.user = user);
 
     this.toastr.success(`User with id: ${this.user?._id} updated`, "User updated",  {
@@ -62,13 +77,15 @@ export class EditUserComponent implements OnInit {
   }
 
   deleteUser(id: string): void {
-    this.userService.deleteUser(id);
-
-    this.toastr.success(`User with id: ${id} deleted`, "User deleted",  {
-      progressBar: true
-    });
-
-    this.router.navigate(["/user"]);
+    this.deleteUserSubscription = this.userService
+      .deleteUser(id)
+      .subscribe(() => {
+        this.toastr.success(`User with id: ${id} deleted`, "User deleted",  {
+          progressBar: true
+        });
+    
+        this.router.navigate(["/user"]);
+      });
   }
 
 }

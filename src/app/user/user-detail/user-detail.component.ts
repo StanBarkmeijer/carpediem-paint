@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from '../user';
 import { UserService } from '../user.service';
@@ -11,10 +12,15 @@ import { UserService } from '../user.service';
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.css']
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit, OnDestroy {
 
   @Input() user?: User;
   me: any;
+
+  authServiceSubscription!: Subscription;
+  routeSubscription!: Subscription;
+  getUserSubscription!: Subscription;
+  deleteUserSubscription!: Subscription;
 
   constructor(
     private userService: UserService,
@@ -30,16 +36,23 @@ export class UserDetailComponent implements OnInit {
     this.getMe();
   }
 
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
+    this.authServiceSubscription.unsubscribe();
+    this.getUserSubscription.unsubscribe();
+    this.deleteUserSubscription.unsubscribe();
+  }
+
   getMe(): void {
-    this.authService.getUser()
+    this.authServiceSubscription = this.authService.getUser()
       .subscribe((me: any) => this.me = me);
   }
 
   getUser(): void {
-    this.route.params.subscribe((param: any) => {
+    this.routeSubscription = this.route.params.subscribe((param: any) => {
       const id = param["id"];
 
-      this.userService.getUser(id)
+      this.getUserSubscription = this.userService.getUser(id)
         .subscribe((user: User) => this.user = user);
     }) 
   }
@@ -57,7 +70,7 @@ export class UserDetailComponent implements OnInit {
       return; 
     }
 
-    this.userService
+    this.deleteUserSubscription = this.userService
       .deleteUser(id)
       .subscribe(() => {
         this.toastr.success(`User with id: ${id} deleted`, "User deleted",  {
