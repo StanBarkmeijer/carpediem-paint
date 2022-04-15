@@ -1,8 +1,9 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Paint } from '../paint';
 import { PaintService } from '../paint.service';
@@ -12,10 +13,15 @@ import { PaintService } from '../paint.service';
   templateUrl: './paint-detail.component.html',
   styleUrls: ['./paint-detail.component.css']
 })
-export class PaintDetailComponent implements OnInit {
+export class PaintDetailComponent implements OnInit, OnDestroy {
 
   @Input() paint!: Paint;
   authenticated: boolean = false;
+
+  routeSubscription!: Subscription;
+  authServiceSubscription!: Subscription;
+  getPaintSubscription!: Subscription;
+  deletePaintSubscription!: Subscription;
 
   constructor(
     private paintService: PaintService,
@@ -30,19 +36,24 @@ export class PaintDetailComponent implements OnInit {
     this.getPaint();
     this.getMe();
   }
+
+  ngOnDestroy(): void {
+    this.routeSubscription.unsubscribe();
+    this.authServiceSubscription.unsubscribe();
+    this.getPaintSubscription.unsubscribe();
+    this.deletePaintSubscription.unsubscribe();
+  }
   
   getMe(): void {
-    this.authService.getUser()
+    this.authServiceSubscription = this.authService.getUser()
       .subscribe((me: any) => this.authenticated = me.roles.includes("admin"));
   }
 
   getPaint(): void {
-    this.route.params.subscribe((param: any) => {
+    this.routeSubscription = this.route.params.subscribe((param: any) => {
       const id = param["id"];
 
-      console.log(id);
-
-      this.paintService.getPaint(id)
+      this.getPaintSubscription = this.paintService.getPaint(id)
         .subscribe((paint: Paint) => this.paint = paint);
     });
   }
@@ -52,13 +63,15 @@ export class PaintDetailComponent implements OnInit {
   }
 
   deletePaint(id: string): void {
-    this.paintService.deletePaint(id);
+    this.deletePaintSubscription = this.paintService
+      .deletePaint(id)
+      .subscribe(() => {
+        this.toastr.success(`Paint with id: ${id} deleted`, "Paint deleted",  {
+          progressBar: true
+        });
 
-    this.toastr.success(`Paint with id: ${id} deleted`, "Paint deleted",  {
-      progressBar: true
-    });
-
-    this.router.navigate(["/paints"]);
+        this.router.navigate(["/paints"]);
+      });
   }
 
 }

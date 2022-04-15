@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { PaintService } from '../paint.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { PaintService } from '../paint.service';
   templateUrl: './create-paint.component.html',
   styleUrls: ['./create-paint.component.css']
 })
-export class CreatePaintComponent implements OnInit {
+export class CreatePaintComponent implements OnInit, OnDestroy {
+
+  createPaintSubscription!: Subscription;
 
   paintForm = this.fb.group({
     name: ["", [Validators.required, Validators.minLength(3)]],
@@ -28,10 +31,14 @@ export class CreatePaintComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.createPaintSubscription.unsubscribe();
+  }
+
   sendForm(): void {
     if (this.paintForm.invalid) return;
 
-    this.paintService
+    this.createPaintSubscription = this.paintService
       .createPaint(this.paintForm.value)
       .subscribe(() => {
         this.toastr.success("Paint created", "Success", {
