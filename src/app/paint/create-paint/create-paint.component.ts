@@ -32,7 +32,7 @@ export class CreatePaintComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.createPaintSubscription.unsubscribe();
+    this.createPaintSubscription?.unsubscribe();
   }
 
   sendForm(): void {

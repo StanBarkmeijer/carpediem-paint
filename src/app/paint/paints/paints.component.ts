@@ -44,9 +44,9 @@ export class PaintsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authServiceSubscription.unsubscribe();
-    this.getPaintSubscription.unsubscribe();
-    this.deletePaintSubscription.unsubscribe();
+    this.authServiceSubscription?.unsubscribe();
+    this.getPaintSubscription?.unsubscribe();
+    this.deletePaintSubscription?.unsubscribe();
   }
 
   getMe(): void {

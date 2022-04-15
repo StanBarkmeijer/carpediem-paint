@@ -33,7 +33,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.createUserSubscription.unsubscribe();
+    this.createUserSubscription?.unsubscribe();
   }
 
   sendForm(): void {

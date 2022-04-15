@@ -44,10 +44,10 @@ export class OrdersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.getOrdersSubscription.unsubscribe();
-    this.getUserSubscription.unsubscribe();
-    this.setTrueSubscription.unsubscribe();
-    this.setFalseSubscription.unsubscribe();
+    this.getOrdersSubscription?.unsubscribe();
+    this.getUserSubscription?.unsubscribe();
+    this.setTrueSubscription?.unsubscribe();
+    this.setFalseSubscription?.unsubscribe();
   }
 
   getOrders(): void {

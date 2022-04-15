@@ -42,10 +42,10 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.getMeSubscription.unsubscribe();
-    this.routeSubscription.unsubscribe();
-    this.getShipSubscription.unsubscribe();
-    this.createOrderSubscription.unsubscribe();
+    this.getMeSubscription?.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+    this.getShipSubscription?.unsubscribe();
+    this.createOrderSubscription?.unsubscribe();
   }
 
   getMe(): void {

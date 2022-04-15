@@ -37,10 +37,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
-    this.authServiceSubscription.unsubscribe();
-    this.getUserSubscription.unsubscribe();
-    this.deleteUserSubscription.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+    this.authServiceSubscription?.unsubscribe();
+    this.getUserSubscription?.unsubscribe();
+    this.deleteUserSubscription?.unsubscribe();
   }
 
   getMe(): void {

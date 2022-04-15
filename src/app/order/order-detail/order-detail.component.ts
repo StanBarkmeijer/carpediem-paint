@@ -43,11 +43,11 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
-    this.getOrderSubscription.unsubscribe();
-    this.getUserSubscription.unsubscribe();
-    this.getMeSubscription.unsubscribe();
-    this.deleteOrderSubscription.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+    this.getOrderSubscription?.unsubscribe();
+    this.getUserSubscription?.unsubscribe();
+    this.getMeSubscription?.unsubscribe();
+    this.deleteOrderSubscription?.unsubscribe();
   }
 
   getOrder(): void {

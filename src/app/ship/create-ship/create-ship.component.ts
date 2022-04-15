@@ -46,8 +46,8 @@ export class CreateShipComponent implements OnInit, OnDestroy {
  }
 
   ngOnDestroy(): void {
-    this.createShipSubscription.unsubscribe();
-    this.getPaintSubscription.unsubscribe();
+    this.createShipSubscription?.unsubscribe();
+    this.getPaintSubscription?.unsubscribe();
   }
 
   getPaints(): void {

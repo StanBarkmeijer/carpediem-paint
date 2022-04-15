@@ -38,10 +38,10 @@ export class PaintDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
-    this.authServiceSubscription.unsubscribe();
-    this.getPaintSubscription.unsubscribe();
-    this.deletePaintSubscription.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+    this.authServiceSubscription?.unsubscribe();
+    this.getPaintSubscription?.unsubscribe();
+    this.deletePaintSubscription?.unsubscribe();
   }
   
   getMe(): void {

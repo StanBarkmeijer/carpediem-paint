@@ -31,8 +31,8 @@ export class NavComponent implements OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
-    this.authSubscription.unsubscribe();
-    this.getUserSubscription.unsubscribe();
+    this.authSubscription?.unsubscribe();
+    this.getUserSubscription?.unsubscribe();
   }
 
   isLoggedIn(): void {

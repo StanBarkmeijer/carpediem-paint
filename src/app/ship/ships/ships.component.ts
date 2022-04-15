@@ -44,9 +44,9 @@ export class ShipsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authServiceSubscription.unsubscribe();
-    this.getShipsSubscription.unsubscribe();
-    this.deleteShipSubscription.unsubscribe();
+    this.authServiceSubscription?.unsubscribe();
+    this.getShipsSubscription?.unsubscribe();
+    this.deleteShipSubscription?.unsubscribe();
   }
 
   getMe(): void {

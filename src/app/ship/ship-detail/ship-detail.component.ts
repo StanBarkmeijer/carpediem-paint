@@ -37,9 +37,9 @@ export class ShipDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authServiceSubscription.unsubscribe();
-    this.routeSubscription.unsubscribe();
-    this.getShipSubscription.unsubscribe();
+    this.authServiceSubscription?.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+    this.getShipSubscription?.unsubscribe();
   }
   
   getMe(): void {

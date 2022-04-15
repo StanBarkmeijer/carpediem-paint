@@ -43,11 +43,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
-    this.authServiceSubscription.unsubscribe();
-    this.getUserSubscription.unsubscribe();
-    this.editUserSubscription.unsubscribe();
-    this.deleteUserSubscription.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+    this.authServiceSubscription?.unsubscribe();
+    this.getUserSubscription?.unsubscribe();
+    this.editUserSubscription?.unsubscribe();
+    this.deleteUserSubscription?.unsubscribe();
   }
 
   getUser(): void {

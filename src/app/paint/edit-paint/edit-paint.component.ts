@@ -42,10 +42,10 @@ export class EditPaintComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
-    this.getPaintSubscription.unsubscribe();
-    this.editPaintSubscription.unsubscribe();
-    this.deletePaintSubscription.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+    this.getPaintSubscription?.unsubscribe();
+    this.editPaintSubscription?.unsubscribe();
+    this.deletePaintSubscription?.unsubscribe();
   }
 
   getPaint(): void {

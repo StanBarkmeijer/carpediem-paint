@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { ShipService } from 'src/app/ship/ship.service';
   templateUrl: './select-ship.component.html',
   styleUrls: ['./select-ship.component.css']
 })
-export class SelectShipComponent implements OnInit {
+export class SelectShipComponent implements OnInit, OnDestroy {
 
   ships: Ship[] = [];
   displayedColumns = ["name", "actions"];
@@ -35,6 +35,10 @@ export class SelectShipComponent implements OnInit {
 
   ngOnInit(): void {
     this.getShips();
+  }
+
+  ngOnDestroy(): void {
+    this.shipSubscription?.unsubscribe();
   }
 
   getShips(): void {

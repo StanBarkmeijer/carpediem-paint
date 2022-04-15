@@ -54,10 +54,10 @@ export class EditShipComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
-    this.getShipSubscription.unsubscribe();
-    this.getPaintSubscription.unsubscribe();
-    this.editShipSubscription.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+    this.getShipSubscription?.unsubscribe();
+    this.getPaintSubscription?.unsubscribe();
+    this.editShipSubscription?.unsubscribe();
   }
 
   getShip(): void {
