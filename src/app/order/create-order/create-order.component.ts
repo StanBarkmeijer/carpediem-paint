@@ -1,7 +1,8 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Paint } from 'src/app/paint/paint';
 import { Ship } from 'src/app/ship/ship';
@@ -14,11 +15,16 @@ import { OrderService } from '../order.service';
   templateUrl: './create-order.component.html',
   styleUrls: ['./create-order.component.css']
 })
-export class CreateOrderComponent implements OnInit {
+export class CreateOrderComponent implements OnInit, OnDestroy {
 
   @Input() ship!: Ship;
   paints: any[] = [];
   me!: User;
+
+  getMeSubscription!: Subscription;
+  routeSubscription!: Subscription;
+  getShipSubscription!: Subscription;
+  createOrderSubscription!: Subscription;
 
   constructor(
     private shipService: ShipService,
@@ -35,17 +41,24 @@ export class CreateOrderComponent implements OnInit {
     this.getMe();
   }
 
+  ngOnDestroy(): void {
+    this.getMeSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
+    this.getShipSubscription.unsubscribe();
+    this.createOrderSubscription.unsubscribe();
+  }
+
   getMe(): void {
-    this.authService.getUser().subscribe((user: any) => {
-      this.me = user;
-    });
+    this.getMeSubscription = this.authService
+      .getUser()
+      .subscribe((user: any) => this.me = user);
   }
 
   getShip(): void {
-    this.route.params.subscribe((param: any) => {
+    this.routeSubscription = this.route.params.subscribe((param: any) => {
       const id = param["id"];
 
-      this.shipService
+      this.getShipSubscription = this.shipService
         .getShip(id)
         .subscribe((ship: Ship) => {
           this.ship = ship;
@@ -120,10 +133,12 @@ export class CreateOrderComponent implements OnInit {
       date: new Date()
     };
 
-    this.orderService.createOrder(object).subscribe(() => {
-      this.toastr.success("Order succesvol aangemaakt!");
-      this.router.navigate(["/"]);
-    });
+    this.createOrderSubscription = this.orderService
+      .createOrder(object)
+      .subscribe(() => {
+        this.toastr.success("Order succesvol aangemaakt!");
+        this.router.navigate(["/"]);
+      });
   }
 
   private calculate(input: any): any[] {

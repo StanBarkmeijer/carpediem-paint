@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
-export class NavComponent {
+export class NavComponent implements OnDestroy {
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -21,24 +21,34 @@ export class NavComponent {
   loggedIn: boolean = false;
   isAdmin: boolean = false;
 
+  authSubscription!: Subscription;
+  getUserSubscription!: Subscription;
+
   constructor(
     private breakpointObserver: BreakpointObserver, 
     public authService: AuthService,
     private router: Router
   ) {}
 
+  ngOnDestroy(): void {
+    this.authSubscription.unsubscribe();
+    this.getUserSubscription.unsubscribe();
+  }
+
   isLoggedIn(): void {
-    this.authService.getUser().subscribe((u) => this.loggedIn = u !== null );
+    this.authSubscription = this.authService.getUser()
+      .subscribe((u) => this.loggedIn = u !== null );
   }
 
   userIsAdmin(): void {
-    this.authService
+    this.getUserSubscription = this.authService
       .getUser()
       .subscribe((u) => this.isAdmin = u!.roles.includes("admin"));	
   }
 
   signOut(): void {
-    this.authService.signOut();
+    this.authService
+      .signOut();
   }
 
 }

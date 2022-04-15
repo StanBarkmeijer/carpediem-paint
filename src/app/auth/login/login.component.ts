@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -8,10 +9,12 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   email: string | null = null;
   password: string | null = null;
   error?: string;
+
+  loginSubscription!: Subscription;
 
   loginForm = this.fb.group({
     email: ["", [Validators.required, Validators.email]],
@@ -27,8 +30,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.loginSubscription.unsubscribe();
+  }
+
   login(): void {    
-    this.authService
+    this.loginSubscription = this.authService
       .login(this.loginForm.get("email")?.value, this.loginForm.get("password")?.value)
       .subscribe({ 
         next: () => this.router.navigateByUrl("/"),

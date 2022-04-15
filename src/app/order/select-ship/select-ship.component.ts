@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Ship } from 'src/app/ship/ship';
 import { ShipService } from 'src/app/ship/ship.service';
 
@@ -15,6 +16,8 @@ export class SelectShipComponent implements OnInit {
   ships: Ship[] = [];
   displayedColumns = ["name", "actions"];
   dataSource!: MatTableDataSource<Ship>;
+
+  shipSubscription!: Subscription;
 
   applyFilter(event: Event) {
     let filterValue: string = (event.target as HTMLInputElement).value;
@@ -35,7 +38,7 @@ export class SelectShipComponent implements OnInit {
   }
 
   getShips(): void {
-    this.shipService.getShips()
+    this.shipSubscription = this.shipService.getShips()
       .subscribe((ships: Ship[]) => {
         this.ships = ships
         this.dataSource = new MatTableDataSource<Ship>(ships);
