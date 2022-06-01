@@ -20,7 +20,7 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
   @Input() order!: Order;
   price = 0;
   authenticated: boolean = false;
-  displayedColumns = ["name", "quantity", "price"];
+  displayedColumns = ["name", "quantity", "price", "liter"];
 
   routeSubscription!: Subscription;
   getOrderSubscription!: Subscription;

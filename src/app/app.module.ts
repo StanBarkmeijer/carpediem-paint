@@ -55,6 +55,7 @@ import { OrdersComponent } from './order/orders/orders.component';
 import { EditOrderComponent } from './order/edit-order/edit-order.component';
 import { SelectShipComponent } from './order/select-ship/select-ship.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -110,7 +111,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatSortModule,
     RouterModule.forRoot([]),
     MatCheckboxModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatExpansionModule
   ],
   providers: [
     MatDatepickerModule,

@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Paint } from 'src/app/paint/paint';
 import { Ship } from 'src/app/ship/ship';
 import { ShipService } from 'src/app/ship/ship.service';
 import { User } from 'src/app/user/user';
@@ -97,14 +96,13 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
             }));
 
           ship.overigen
-            .forEach((part: any) => {
-              console.log(part.paint);paints["Overigen"].push({
+            .forEach((part: any) => paints["Overigen"].push({
               part: part.part,
               paint: part.paint,
               color: part.paint.color,
               count: 0,
               amount: part.paint.amount 
-            })});
+            }));
 
           this.paints = paints;
         });
