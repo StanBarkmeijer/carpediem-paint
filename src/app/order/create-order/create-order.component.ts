@@ -74,7 +74,8 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
               part: part.part, 
               paint: part.paint, 
               color: part.paint.color,
-              count: 0 
+              count: 0,
+              amount: part.paint.amount 
             }));
 
           ship.middenschip
@@ -82,7 +83,8 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
               part: part.part,
               paint: part.paint,
               color: part.paint.color,
-              count: 0 
+              count: 0,
+              amount: part.paint.amount 
             }));
 
           ship.achterschip
@@ -90,16 +92,19 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
               part: part.part,
               paint: part.paint,
               color: part.paint.color,
-              count: 0 
+              count: 0,
+              amount: part.paint.amount 
             }));
 
           ship.overigen
-            .forEach((part: any) => paints["Overigen"].push({
+            .forEach((part: any) => {
+              console.log(part.paint);paints["Overigen"].push({
               part: part.part,
               paint: part.paint,
               color: part.paint.color,
-              count: 0 
-            }));
+              count: 0,
+              amount: part.paint.amount 
+            })});
 
           this.paints = paints;
         });
@@ -148,8 +153,9 @@ export class CreateOrderComponent implements OnInit, OnDestroy {
       if (paint.count > 0) {
         paints.push({
           ...paint,
-          price: paint.paint.price * paint.count
-        })
+          price: paint.paint.price * paint.count,
+          amount: paint.paint.amount * paint.count
+        });
       }
     });
 

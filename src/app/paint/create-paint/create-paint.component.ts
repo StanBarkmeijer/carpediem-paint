@@ -19,6 +19,7 @@ export class CreatePaintComponent implements OnInit, OnDestroy {
     price: ["", [Validators.required, Validators.min(0)]],
     url: ["", [Validators.required, Validators.minLength(3)]],
     color: ["", [Validators.required, Validators.minLength(3)]],
+    amount: ["", [Validators.required, Validators.min(0)]]
   });
 
   constructor(

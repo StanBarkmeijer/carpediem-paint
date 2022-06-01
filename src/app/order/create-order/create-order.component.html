@@ -15,7 +15,7 @@
                             <mat-form-field class="input" style="width: 50%">
                                 <p>
                                     <mat-icon mat-list-icon [ngStyle]="{'color': x.paint.color }">format_paint</mat-icon>
-                                {{ x.paint.name }} (price: {{ x.count * x.paint.price | currency:'EUR' }})
+                                    {{ x.paint.name }} ({{ x.paint.amount * x.count }}L - price: {{ x.count * x.paint.price | currency:'EUR' }})
                                 </p>
 
                                 <input 

@@ -22,6 +22,10 @@
                     <input type="color" matInput placeholder="Color" formControlName="color" required>
                 </mat-form-field>
 
+                <mat-form-field class="input">
+                    <input type="number" matInput placeholder="Liters" formControlName="amount" required>
+                </mat-form-field>
+
                 <!-- <div>
                     <mat-label>Gender: </mat-label>
                     <mat-radio-group aria-label="Select an option">
@@ -50,6 +54,9 @@
                 </div>
                 <div *ngIf="paintForm.controls['color'].invalid">
                     <mat-error *ngIf="paintForm.controls['color'].errors?.['required']">Color is required</mat-error>
+                </div>
+                <div *ngIf="paintForm.controls['amount'].invalid">
+                    <mat-error *ngIf="paintForm.controls['amount'].errors?.['required']">Amount is required</mat-error>
                 </div>
             </div>
         </mat-card>

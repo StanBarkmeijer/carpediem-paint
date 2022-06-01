@@ -14,6 +14,9 @@ const PaintSchema = new mongoose.Schema({
     },
     color: {
         type: String
+    },
+    amount: {
+        type: Number  
     }
 });
 

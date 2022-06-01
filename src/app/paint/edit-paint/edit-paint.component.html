@@ -26,6 +26,10 @@
                 <mat-label>Color</mat-label>
                 <input type="color" matInput [(ngModel)]="paint.color" formControlName="color" placeholder="color">
             </mat-form-field>
+            <mat-form-field class="input">
+                <mat-label>Amount (Liters)</mat-label>
+                <input type="number" matInput [(ngModel)]="paint.amount" formControlName="amount" placeholder="amount">
+            </mat-form-field>
         </form>
 
         <div style="margin-top: 20px" *ngIf="paintForm.invalid && paintForm.touched" class="alert alert-danger">
@@ -41,6 +45,9 @@
             </div>
             <div *ngIf="paintForm.controls['color'].invalid">
                 <mat-error *ngIf="paintForm.controls['color'].errors?.['required']">Color is required</mat-error>
+            </div>
+            <div *ngIf="paintForm.controls['amount'].invalid">
+                <mat-error *ngIf="paintForm.controls['amount'].errors?.['required']">Amount is required</mat-error>
             </div>
         </div>
     </mat-card-content>

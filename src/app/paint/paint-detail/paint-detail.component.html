@@ -2,7 +2,7 @@
     <mat-card *ngIf="paint" class="card">
         <mat-card-header>
             <mat-card-title>Paint information: {{ paint.name | uppercase }}</mat-card-title>
-            <mat-card-subtitle>{{ paint.price | currency: "EUR" }}</mat-card-subtitle>
+            <mat-card-subtitle>{{ paint.price | currency: "EUR" }} - {{ paint.amount }} Liter</mat-card-subtitle>
         </mat-card-header>
     
         <mat-card-content> 

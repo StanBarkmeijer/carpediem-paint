@@ -4,5 +4,6 @@ export interface Paint {
     name: string,
     price: number,
     url: string,
-    color: string
+    color: string,
+    amount: number
 }
