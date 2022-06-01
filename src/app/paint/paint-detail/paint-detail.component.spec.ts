@@ -33,7 +33,8 @@ describe('PaintDetailComponent', () => {
       name: "Nelfamar Supertop Gloss Sneeuwwit 1 comp",
       price: 15,
       url: "https://www.verfgroothandel.nl/nelfamar-supertop-1.html",
-      color: "#F3F6FB"
+      color: "#F3F6FB",
+      amount: 1
     };
 
     fixture.detectChanges();
@@ -49,13 +50,14 @@ describe('PaintDetailComponent', () => {
       name: "Nelfamar Supertop Gloss Sneeuwwit 1 comp",
       price: 15,
       url: "https://www.verfgroothandel.nl/nelfamar-supertop-1.html",
-      color: "#F3F6FB"
+      color: "#F3F6FB",
+      amount: 1
     };
 
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     
     expect(compiled.querySelector("mat-card-subtitle").innerText)
-      .toBe("€15.00")
+      .toBe("€15.00 - 1 Liter")
   });
 });

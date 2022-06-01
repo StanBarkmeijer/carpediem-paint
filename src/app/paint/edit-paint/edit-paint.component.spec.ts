@@ -40,7 +40,8 @@ describe('EditPaintComponent', () => {
       name: "Nelfamar Supertop Gloss Sneeuwwit 1 comp",
       price: 15,
       url: "https://www.verfgroothandel.nl/nelfamar-supertop-1.html",
-      color: "#F3F6FB"
+      color: "#F3F6FB",
+      amount: 1
     };
 
     // const list: Array<string> = [
