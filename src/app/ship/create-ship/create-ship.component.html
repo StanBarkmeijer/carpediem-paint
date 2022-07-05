@@ -15,35 +15,42 @@
         <input matInput placeholder="MMSI" formControlName="mmsi" required>
       </mat-form-field>
 
-      <mat-card *ngFor="let onderdeel of parts2" style="margin-top: 5px">
-        <mat-card-title>{{ onderdeel.name }}</mat-card-title>
-        <div *ngFor="let sub of onderdeel.paints">
-            <mat-card-content>
+      <mat-card>
+        <mat-card-title>Paints</mat-card-title>
+        <mat-card-content>
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let onderdeel of parts2">
+              <mat-expansion-panel-header>
+                <mat-panel-title>{{ onderdeel.name }}</mat-panel-title>
+              </mat-expansion-panel-header>
+              
+              <div *ngFor="let sub of onderdeel.paints">
                 <p><b>{{ sub[0].part }}</b></p>
                 <div *ngFor="let subpaint of sub">
-                    <mat-checkbox
-                    #box
-                    [name]="onderdeel.name + '-' + sub[0].part + '-' + subpaint.paint.name"
-                    [value]="subpaint.paint._id"
-                    (change)="changeBox($event)">
-                        <mat-icon mat-list-icon [ngStyle]="{'color': subpaint.paint.color }">format_paint</mat-icon>
-                        {{ subpaint.paint.name }}
-                    </mat-checkbox>
-                </div>
-            </mat-card-content>
-        </div>
-
-        <div style="margin-top: 20px" *ngIf="shipForm.invalid && shipForm.touched" class="alert alert-danger">
-          <div *ngIf="shipForm.controls['name'].invalid">
-            <mat-error *ngIf="shipForm.controls['name'].errors?.['required']">Name is required</mat-error>
-            <mat-error *ngIf="shipForm.controls['name'].errors?.['minLength']">Name must be at least 3 characters long</mat-error>
-          </div>
-          <div *ngIf="shipForm.controls['mmsi'].invalid">
-            <mat-error *ngIf="shipForm.controls['mmsi'].errors?.['required']">MMSI is required</mat-error>
-          </div>
-        </div>
+                  <mat-checkbox
+                  #box
+                  [name]="onderdeel.name + '-' + sub[0].part + '-' + subpaint.paint.name"
+                  [value]="subpaint.paint._id"
+                  (change)="changeBox($event)">
+                      <mat-icon mat-list-icon [ngStyle]="{'color': subpaint.paint.color }">format_paint</mat-icon>
+                      {{ subpaint.paint.name }}
+                  </mat-checkbox>
+              </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
       </mat-card>
 
+      <div style="margin-top: 20px" *ngIf="shipForm.invalid && shipForm.touched" class="alert alert-danger">
+        <div *ngIf="shipForm.controls['name'].invalid">
+          <mat-error *ngIf="shipForm.controls['name'].errors?.['required']">Name is required</mat-error>
+          <mat-error *ngIf="shipForm.controls['name'].errors?.['minLength']">Name must be at least 3 characters long</mat-error>
+        </div>
+        <div *ngIf="shipForm.controls['mmsi'].invalid">
+          <mat-error *ngIf="shipForm.controls['mmsi'].errors?.['required']">MMSI is required</mat-error>
+        </div>
+      </div>
     </div>
 
     <div class="full-wrapper button-wrapper" style="margin-top: 20px">

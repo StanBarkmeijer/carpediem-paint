@@ -6,38 +6,20 @@
         </mat-card-header>
     
         <mat-card-content>
-            <div *ngFor="let onderdeel of paints | keyvalue">
-                <div *ngIf="onderdeel.value.length != 0">
-                    <h1>{{ onderdeel.key }}</h1>
-
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let onderdeel of paints | keyvalue">
+                    <mat-expansion-panel-header>{{ onderdeel.key }}</mat-expansion-panel-header>
+                
                     <div *ngFor="let x of onderdeel.value">
                         <p><b>{{ x.part }}</b></p>
+
                         <p>
                             <mat-icon mat-list-icon [ngStyle]="{'color': x.paint.color }">format_paint</mat-icon>
-                            {{ x.paint.name }}
+                            {{ x.paint.name }} per {{ x.paint.amount }}L (price per L: {{ x.paint.price / x.paint.amount | currency:'EUR' }})
                         </p>
                     </div>
-                </div>
-            </div>
-
-            <!-- <div id="ais">
-                <script>
-                    var mst_width="100%";
-                    var mst_height="350px";
-                    var mst_border="0";
-                    var mst_map_style="simple";
-                    var mst_mmsi="244670140";
-                    var mst_show_track="false";
-                    var mst_show_info="true";
-                    var mst_fleet="";
-                    var mst_lat="";
-                    var mst_lng="";
-                    var mst_zoom="";
-                    var mst_show_names="0";
-                    var mst_scroll_wheel="true";
-                    var mst_show_menu="true";
-                </script><script id="myshiptrackingscript" src="//www.myshiptracking.com/js/widgetApi.js" async defer></script>
-            </div> -->
+                </mat-expansion-panel>
+            </mat-accordion>
         </mat-card-content>
     
         <mat-card-actions>
