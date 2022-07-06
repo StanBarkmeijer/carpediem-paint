@@ -15,6 +15,17 @@
         <input matInput placeholder="MMSI" formControlName="mmsi" required>
       </mat-form-field>
 
+      <br />
+
+      <!-- Input ship type -->
+      <mat-form-field>
+        <mat-select placeholder="Ship type" formControlName="shipType" (selectionChange)="change($event.value)">
+          <mat-option *ngFor="let shipType of shipTypeArray" [value]="shipType">
+            {{ shipType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <mat-card>
         <mat-card-title>Paints</mat-card-title>
         <mat-card-content>
@@ -35,7 +46,7 @@
                       <mat-icon mat-list-icon [ngStyle]="{'color': subpaint.paint.color }">format_paint</mat-icon>
                       {{ subpaint.paint.name }}
                   </mat-checkbox>
-              </div>
+                </div>
               </div>
             </mat-expansion-panel>
           </mat-accordion>

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -16,6 +16,9 @@ export class CreateShipComponent implements OnInit, OnDestroy {
 
   paints!: Paint[];
 
+  shipTypeArray: string[] = ["Container", "Poederschip"];
+  shipType: string = "Container";
+
   voorschip!: { part: String, paint: Paint; selected: boolean; }[][];
   middenschip!: { part: String, paint: Paint; selected: boolean; }[][];
   achterschip!: { part: String, paint: Paint; selected: boolean; }[][];
@@ -31,6 +34,7 @@ export class CreateShipComponent implements OnInit, OnDestroy {
   shipForm = this.fb.group({
     name: ["", [Validators.required, Validators.minLength(3)]],
     mmsi: ["", [Validators.required, Validators.minLength(3)]],
+    shipType: ["Container", [Validators.required]],
   })
 
   constructor(
@@ -73,11 +77,16 @@ export class CreateShipComponent implements OnInit, OnDestroy {
           }));
         });
         this.voorschip = voorschipArray;
-        
 
-        const middenschipParts = ["Gangboorden", "Tankdek", "Dennenboom"]
+        const middenSchipParts = {
+          "Container": ["Ruim"],
+          "Poederschip": ["Gangboorden", "Tankdek", "Dennenboom"]
+        };
+
+        let middenschipPart: string[] = middenSchipParts[this.shipType as keyof typeof middenSchipParts];
+
         const middenschipArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
-        middenschipParts.forEach((part) => {
+        middenschipPart.forEach((part) => {
           middenschipArray.push(paints.map((paint) => {
               return {
                 part: part,
@@ -125,6 +134,12 @@ export class CreateShipComponent implements OnInit, OnDestroy {
             paints: this.overigen
         }];
       });
+  }
+
+  change(event: any) {
+    this.shipType = event;
+
+    this.getPaints();
   }
 
   changeBox(event: any): void {

@@ -66,7 +66,7 @@ export class ShipsComponent implements OnInit, OnDestroy {
     this.deleteShipSubscription = this.shipService
       .deleteShip(id)
       .subscribe(() => {
-        this.toastr.success(`User with id: ${id} deleted`, "User deleted",  {
+        this.toastr.success(`Ship with id: ${id} deleted`, "Ship deleted",  {
           progressBar: true
         });
         this.getShips()
