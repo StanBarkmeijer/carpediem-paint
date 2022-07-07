@@ -16,7 +16,7 @@ export class OnlyAdminUsersGuard implements CanActivate {
     return this.authService
       .getUser()
       .pipe(
-        map(user => !!user?.roles.includes("admin") || user?._id === this.route.snapshot.paramMap.get('id'))
+        map((user: any) => !!user?.roles.includes("admin") || user?._id === this.route.snapshot.paramMap.get('id'))
       );
   }
 }

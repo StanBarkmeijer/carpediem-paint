@@ -49,13 +49,13 @@ export class DashboardComponent {
     this.orderServiceSubscription = this.orderService
       .getOrders()
       .subscribe({
-        next: (orders) => {
+        next: (orders: Order[]) => {
           orders.forEach((order: Order) => {
             order.user = this.userService
               .getUser(order.user)
               .subscribe({
-                next: (user) => order.user = user,
-                error: (err) => {}
+                next: (user: any) => order.user = user,
+                error: (err: any) => {}
               });
 
             this.orders.push(order);
@@ -68,7 +68,7 @@ export class DashboardComponent {
             { data: [this.approved, this.unApproved], backgroundColor: ['#B3FFCC', '#FF6161'] }
           ];
         },
-        error: (err) => {}
+        error: (err: any) => {}
       });
   }
 

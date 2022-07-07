@@ -37,13 +37,13 @@ export class NavComponent implements OnDestroy {
 
   isLoggedIn(): void {
     this.authSubscription = this.authService.getUser()
-      .subscribe((u) => this.loggedIn = u !== null );
+      .subscribe((u: null) => this.loggedIn = u !== null );
   }
 
   userIsAdmin(): void {
     this.getUserSubscription = this.authService
       .getUser()
-      .subscribe((u) => this.isAdmin = u!.roles.includes("admin"));	
+      .subscribe((u: any) => this.isAdmin = u!.roles.includes("admin"));	
   }
 
   signOut(): void {

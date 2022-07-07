@@ -41,7 +41,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
     this.createUserSubscription = this.userService
       .createUser(this.userForm.value)
-      .subscribe((user) => {
+      .subscribe((user: { _id: any; }) => {
         this.toastr.success(`Created user with ID: ${user._id}`, "Added user", {
           progressBar: true
         });

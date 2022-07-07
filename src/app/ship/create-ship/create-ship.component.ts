@@ -57,8 +57,8 @@ export class CreateShipComponent implements OnInit, OnDestroy {
   getPaints(): void {
     this.getPaintSubscription = this.paintService
       .getPaints()
-      .subscribe(paints => {
-        this.paints = paints.map(paint => {
+      .subscribe((paints: any[]) => {
+        this.paints = paints.map((paint: any) => {
           return {
             ...paint,
             selected: false
@@ -68,7 +68,7 @@ export class CreateShipComponent implements OnInit, OnDestroy {
         const voorschipParts = ["Boeing", "Voorwoning", "Voordek", "Potdeksel", "Letters", "Woningroefdek", "Ankelier"]
         const voorschipArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         voorschipParts.forEach((part) => {
-          voorschipArray.push(paints.map((paint) => {
+          voorschipArray.push(paints.map((paint: any) => {
               return {
                 part: part,
                 paint: paint,
@@ -87,7 +87,7 @@ export class CreateShipComponent implements OnInit, OnDestroy {
 
         const middenschipArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         middenschipPart.forEach((part) => {
-          middenschipArray.push(paints.map((paint) => {
+          middenschipArray.push(paints.map((paint: any) => {
               return {
                 part: part,
                 paint: paint,
@@ -100,7 +100,7 @@ export class CreateShipComponent implements OnInit, OnDestroy {
         const achterschipParts = ["Gangboorden", "Boeing", "Potdeksel", "Woning", "Woningroefdek", "Autokraan", "Ankelier", "Erfschild", "Stuurhutpaal", "Spiegel"]
         const achterschipArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         achterschipParts.forEach((part) => {
-          achterschipArray.push(paints.map((paint) => {
+          achterschipArray.push(paints.map((paint: any) => {
               return {
                 part: part,
                 paint: paint,
@@ -113,7 +113,7 @@ export class CreateShipComponent implements OnInit, OnDestroy {
         const overigenParts = ["Ballast tanken", "Zijen van het schip", "Ruimen", "Machinekamer", "Voorpiek", "Achterpiek"]
         const overigenArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         overigenParts.forEach((part) => {
-          overigenArray.push(paints.map((paint) => {
+          overigenArray.push(paints.map((paint: any) => {
               return {
                 part: part,
                 paint: paint,
@@ -195,7 +195,7 @@ export class CreateShipComponent implements OnInit, OnDestroy {
           this.toastr.success("Schip is aangemaakt! " + ship._id, "Succes!");
           this.router.navigate(["/ship"]);
         }, 
-        error: err => {
+        error: (err: any) => {
           this.toastr.error("Missing name or mssi", "Error!");
         }});
   }

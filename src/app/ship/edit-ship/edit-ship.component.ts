@@ -80,8 +80,8 @@ export class EditShipComponent implements OnInit, OnDestroy {
   getPaints(): void {
     this.getPaintSubscription = this.paintService
       .getPaints()
-      .subscribe(paints => {
-        this.paints = paints.map(paint => {
+      .subscribe((paints: any[]) => {
+        this.paints = paints.map((paint: any) => {
           return {
             ...paint,
             selected: false
@@ -91,7 +91,7 @@ export class EditShipComponent implements OnInit, OnDestroy {
         const voorschipParts = ["Boeing", "Voorwoning", "Voordek", "Potdeksel", "Letters", "Woningroefdek", "Ankelier"]
         const voorschipArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         voorschipParts.forEach((part) => {
-          voorschipArray.push(paints.map((paint) => {
+          voorschipArray.push(paints.map((paint: any) => {
               return {
                 part: part,
                 paint: paint,
@@ -105,7 +105,7 @@ export class EditShipComponent implements OnInit, OnDestroy {
         const middenschipParts = ["Gangboorden", "Tankdek", "Dennenboom"]
         const middenschipArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         middenschipParts.forEach((part) => {
-          middenschipArray.push(paints.map((paint) => {
+          middenschipArray.push(paints.map((paint: any) => {
               return {
                 part: part,
                 paint: paint,
@@ -118,7 +118,7 @@ export class EditShipComponent implements OnInit, OnDestroy {
         const achterschipParts = ["Gangboorden", "Boeing", "Potdeksel", "Woning", "Woningroefdek", "Autokraan", "Ankelier", "Erfschild", "Stuurhutpaal", "Spiegel"]
         const achterschipArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         achterschipParts.forEach((part) => {
-          achterschipArray.push(paints.map((paint) => {
+          achterschipArray.push(paints.map((paint: any) => {
               return {
                 part: part,
                 paint: paint,
@@ -131,7 +131,7 @@ export class EditShipComponent implements OnInit, OnDestroy {
         const overigenParts = ["Ballast tanken", "Zijen van het schip", "Ruimen", "Machinekamer", "Voorpiek", "Achterpiek"]
         const overigenArray: { part: String, paint: Paint; selected: boolean; }[][] = [];
         overigenParts.forEach((part) => {
-          overigenArray.push(paints.map((paint) => {
+          overigenArray.push(paints.map((paint: any) => {
               return {
                 part: part,
                 paint: paint,
@@ -204,7 +204,7 @@ export class EditShipComponent implements OnInit, OnDestroy {
     }
 
     this.editShipSubscription = this.shipService
-      .editShip(this.ship._id, ship).subscribe(ship => {
+      .editShip(this.ship._id, ship).subscribe((ship: any) => {
         this.toastr.success("Schip is geupdated! " + name, "Succes!");
         this.router.navigate(["/ship"]);
       });

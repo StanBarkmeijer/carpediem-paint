@@ -40,7 +40,7 @@ describe('UserService', () => {
     let users: Observable<User[]> = service.getUsers();
 
     users
-      .subscribe((u) => expect(u.length).toBe(5));
+      .subscribe((u: string | any[]) => expect(u.length).toBe(5));
 
     done();
   });
@@ -49,7 +49,7 @@ describe('UserService', () => {
     let user: Observable<User> = service.getUser("6");
 
     user
-      .subscribe((u) => {
+      .subscribe((u: { firstName: any; lastName: any; email: any; }) => {
         expect(typeof u).toBe("object");
 
         expect(u.firstName).toBe("Test");
@@ -64,7 +64,7 @@ describe('UserService', () => {
     let user: Observable<User> = service.getUser("999999");
 
     user
-      .subscribe((u) => {
+      .subscribe((u: any) => {
         expect(u).toBeUndefined();
       });
 
@@ -83,12 +83,12 @@ describe('UserService', () => {
   // });
 
   it("should not delete user with non existant ID", (done) => {
-    service.getUsers().subscribe((r) => expect(r.length).toBe(5));
+    service.getUsers().subscribe((r: string | any[]) => expect(r.length).toBe(5));
 
     service
       .deleteUser("999999");
 
-      service.getUsers().subscribe((r) => expect(r.length).toBe(5));
+      service.getUsers().subscribe((r: string | any[]) => expect(r.length).toBe(5));
 
     done();
   });
