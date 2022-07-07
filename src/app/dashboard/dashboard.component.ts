@@ -20,7 +20,7 @@ export class DashboardComponent {
   unApproved: number = 0;
   
   doughnutChartData: ChartConfiguration<'doughnut'>['data']['datasets'] = [
-    { data: [this.approved, this.unApproved], backgroundColor: ['#00ff00', '#ff0000'] }
+    { data: [this.approved, this.unApproved], backgroundColor: ['#B3FFCC', '#FF6161'] }
   ];
 
   open(): void {
@@ -64,7 +64,9 @@ export class DashboardComponent {
           this.approved = this.approvedOrders().length;
           this.unApproved = this.notApprovedOrders().length;
 
-
+          this.doughnutChartData = [
+            { data: [this.approved, this.unApproved], backgroundColor: ['#B3FFCC', '#FF6161'] }
+          ];
         },
         error: (err) => {}
       });

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, UntypedFormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -38,7 +38,7 @@ export class CreateShipComponent implements OnInit, OnDestroy {
   })
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private shipService: ShipService,
     private paintService: PaintService,
     private toastr: ToastrService,

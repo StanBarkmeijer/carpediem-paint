@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private userService: UserService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {

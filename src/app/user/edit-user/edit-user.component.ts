@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -35,7 +35,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
     private location: Location,
     private toastr: ToastrService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: UntypedFormBuilder
   ) { }
 
   ngOnInit(): void {
