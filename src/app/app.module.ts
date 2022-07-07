@@ -58,6 +58,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     SelectShipComponent,
   ],
   imports: [
+    NgChartsModule,
     HttpClientModule,
     MatSidenavModule,
     CommonModule,
@@ -116,7 +118,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     NgxSpinnerModule,
     MatButtonToggleModule,
     MatSelectModule,
-    MatExpansionModule,
+    MatExpansionModule
   ],
   providers: [
     MatDatepickerModule,
