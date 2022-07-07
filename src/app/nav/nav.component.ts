@@ -37,7 +37,7 @@ export class NavComponent implements OnDestroy {
 
   isLoggedIn(): void {
     this.authSubscription = this.authService.getUser()
-      .subscribe((u: null) => this.loggedIn = u !== null );
+      .subscribe((u: any) => this.loggedIn = u !== null );
   }
 
   userIsAdmin(): void {
